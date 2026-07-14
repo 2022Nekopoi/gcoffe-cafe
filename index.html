@@ -106,11 +106,11 @@
             <div class="flex items-center gap-2">
                 <!-- Sound Toggle button -->
                 <button onclick="toggleAudio()" id="sound-btn" class="bg-angkringan-warm/50 hover:bg-angkringan-warm border border-angkringan-warm/60 p-2.5 rounded-xl text-stone-300 hover:text-angkringan-accent transition-all text-xs" title="Toggle Sound FX">
-                    <i class="fa-solid fa-volume-high"></i>
+                    <i class="fa-solid fa-volume-xmark text-red-500"></i>
                 </button>
 
                 <!-- Quick Menu Scroll Trigger -->
-                <a href="#menu-makanan" onclick="synthPop()" class="hidden sm:inline-flex bg-angkringan-warm/40 hover:bg-angkringan-accent/20 border border-angkringan-warm text-stone-200 hover:text-angkringan-accent px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-300 items-center gap-1.5">
+                <a href="#menu-utama" onclick="synthPop()" class="hidden sm:inline-flex bg-angkringan-warm/40 hover:bg-angkringan-accent/20 border border-angkringan-warm text-stone-200 hover:text-angkringan-accent px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-300 items-center gap-1.5">
                     <i class="fa-solid fa-utensils"></i> List Menu
                 </a>
                 
@@ -149,7 +149,7 @@
                 "Buka Tutup Sak Geleme!"
             </p>
             <p class="text-stone-400 text-sm md:text-base max-w-xl mx-auto font-medium leading-relaxed">
-                Sego kucing teri, sate usus bakar, gorengan mendoan, lan kopi joss areng membara. Sederhana, anget, gayeng, rukun, lan nggarai wareg.
+                Mie rebus hangat, mie goreng lezat, lan aneka wedangan segar syahdu. Prasaja, anget, gayeng, rukun, lan nggarai wareg ing dompet.
             </p>
 
             <!-- Quick Action Icons/Badges -->
@@ -181,9 +181,9 @@
                     <h4 class="font-extrabold text-angkringan-gold text-sm flex items-center gap-2">
                         <i class="fa-solid fa-gift"></i> <span id="pkg-name">Paket Wareg Syahdu</span>
                     </h4>
-                    <p id="pkg-items" class="text-xs text-stone-300 mt-1">Sego Kucing + Sate Usus + Es Teh Anget</p>
+                    <p id="pkg-items" class="text-xs text-stone-300 mt-1">Mie Rebus + Es Teh</p>
                     <div class="flex items-center justify-between mt-3 pt-2.5 border-t border-stone-800/60">
-                        <span id="pkg-price" class="font-bold text-angkringan-accent text-sm">Rp12.000</span>
+                        <span id="pkg-price" class="font-bold text-angkringan-accent text-sm">Rp9.000</span>
                         <button onclick="addPackageToCart()" class="bg-green-600 hover:bg-green-500 text-white font-extrabold text-[10px] px-3.5 py-1.5 rounded-lg transition flex items-center gap-1 shadow-lg">
                             <i class="fa-solid fa-plus-circle"></i> Lebokno Keranjang
                         </button>
@@ -203,7 +203,7 @@
     </section>
 
     <!-- Main Food & Drink Container -->
-    <main class="max-w-6xl mx-auto px-4 py-12">
+    <main id="menu-utama" class="max-w-6xl mx-auto px-4 py-12 scroll-mt-24">
         
         <!-- Search and Live Filters Row -->
         <div class="mb-10 space-y-4">
@@ -212,7 +212,7 @@
                 <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-500">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </span>
-                <input type="text" id="menu-search" oninput="filterMenuByQuery()" placeholder="Goleki sego, sate, wedangan..." class="w-full bg-angkringan-card/80 border border-stone-800 focus:border-angkringan-accent/80 rounded-2xl pl-10 pr-4 py-3 text-sm text-stone-100 placeholder-stone-600 focus:outline-none transition-all shadow-inner">
+                <input type="text" id="menu-search" oninput="filterMenuByQuery()" placeholder="Goleki mie rebus, es jossu, wedang..." class="w-full bg-angkringan-card/80 border border-stone-800 focus:border-angkringan-accent/80 rounded-2xl pl-10 pr-4 py-3 text-sm text-stone-100 placeholder-stone-600 focus:outline-none transition-all shadow-inner">
             </div>
 
             <!-- Dynamic Interactive Filter Tabs -->
@@ -220,14 +220,8 @@
                 <button onclick="filterCategory('all')" id="tab-all" class="filter-tab active-tab bg-angkringan-accent text-angkringan-dark px-4 py-2 rounded-full font-bold text-xs transition duration-200">
                     ✨ Semua Menu
                 </button>
-                <button onclick="filterCategory('sego')" id="tab-sego" class="filter-tab bg-angkringan-warm/50 text-stone-300 hover:bg-angkringan-warm px-4 py-2 rounded-full font-bold text-xs transition duration-200">
-                    🍛 Sego Kucing
-                </button>
-                <button onclick="filterCategory('sate')" id="tab-sate" class="filter-tab bg-angkringan-warm/50 text-stone-300 hover:bg-angkringan-warm px-4 py-2 rounded-full font-bold text-xs transition duration-200">
-                    🍢 Sate-Satean
-                </button>
                 <button onclick="filterCategory('makanan')" id="tab-makanan" class="filter-tab bg-angkringan-warm/50 text-stone-300 hover:bg-angkringan-warm px-4 py-2 rounded-full font-bold text-xs transition duration-200">
-                    🍜 Mie & Gorengan
+                    🍜 Makanan (Mie)
                 </button>
                 <button onclick="filterCategory('minuman')" id="tab-minuman" class="filter-tab bg-angkringan-warm/50 text-stone-300 hover:bg-angkringan-warm px-4 py-2 rounded-full font-bold text-xs transition duration-200">
                     🥤 Wedangan (Minuman)
@@ -240,7 +234,7 @@
             <div class="flex items-center gap-3 mb-8 border-b border-angkringan-warm/60 pb-3">
                 <span class="text-2xl" id="section-emoji">✨</span>
                 <h3 class="text-2xl font-bold text-white tracking-wide uppercase" id="section-title">Menu Angkringan</h3>
-                <span class="ml-auto text-xs text-stone-500 font-medium">Bahan Premium & Fresh</span>
+                <span class="ml-auto text-xs text-stone-500 font-medium">Bahan Pilihan & Fresh</span>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="menu-grid-container">
@@ -271,13 +265,13 @@
                                 <option value="5">⭐⭐⭐⭐⭐ Enak Pol (Mantap Jiwo)</option>
                                 <option value="4">⭐⭐⭐⭐ Wareg Tenan (Cocok Dompet)</option>
                                 <option value="3">⭐⭐⭐ Mayan Lah (Standar)</option>
-                                <option value="2">⭐⭐ Kurang Areng (Kurang Joss)</option>
+                                <option value="2">⭐⭐ Kurang Mantap (Kurang Anget)</option>
                                 <option value="1">⭐ Sengit Mas (Horeg)</option>
                             </select>
                         </div>
                         <div>
                             <label class="block text-stone-400 mb-1">Sambat / Kritik / Pujian (Ulasan)</label>
-                            <textarea id="review-text" rows="3" placeholder="Sego kucingmu sambele pedes tenan mas..." class="w-full bg-angkringan-dark border border-stone-800 focus:border-angkringan-accent rounded-xl px-3 py-2 text-stone-100 outline-none resize-none"></textarea>
+                            <textarea id="review-text" rows="3" placeholder="Mie rebuse anget, kuah lekoh, es jossune seger mas..." class="w-full bg-angkringan-dark border border-stone-800 focus:border-angkringan-accent rounded-xl px-3 py-2 text-stone-100 outline-none resize-none"></textarea>
                         </div>
                         <button onclick="submitReview()" class="w-full bg-angkringan-accent text-angkringan-dark font-black py-2.5 rounded-xl hover:bg-white active:scale-95 transition flex items-center justify-center gap-1.5">
                             <i class="fa-solid fa-paper-plane"></i> Kirim Sambatan
@@ -419,7 +413,7 @@
                         <input type="text" id="order-notes" oninput="updateLiveWAPreview()" placeholder="Contoh: Mie rebus pedas gila, teh manis tawar..." class="w-full bg-angkringan-dark border border-stone-800 focus:border-angkringan-accent rounded-xl px-4 py-2.5 text-sm text-stone-100 placeholder-stone-600 focus:outline-none transition-all">
                     </div>
 
-                    <!-- NEW METODE PEMBAYARAN SELECTION (Custom Premium Buttons) -->
+                    <!-- METODE PEMBAYARAN SELECTION (Custom Premium Buttons) -->
                     <div>
                         <label class="block text-[10px] font-bold text-stone-400 uppercase tracking-wider mb-2">Metode Pembayaran</label>
                         <div class="grid grid-cols-2 gap-2 text-xs">
@@ -588,37 +582,23 @@
     </footer>
 
     <script>
-        // Database menu - Vastly expanded with highly localized iconic Angkringan options!
+        // Database menu - EXACTLY match the raw list provided by the user!
         const menuDB = {
-            // Sego Kucing (Iconic Rice packages)
-            'sego-teri': { name: 'Sego Kucing Sambal Teri', price: 3000, category: 'sego', emoji: '🍛', desc: 'Nasi kucing gurih porsi pas dikihi sambal teri lombok abang khas Jogja.' },
-            'sego-tempe': { name: 'Sego Kucing Orek Tempe', price: 3000, category: 'sego', emoji: '🍛', desc: 'Nasi kucing klasik lauk kering orek tempe manis gurih.' },
-            'sego-mercon': { name: 'Sego Kucing Mercon Pedas', price: 3500, category: 'sego', emoji: '🔥', desc: 'Nasi hangat dengan suwiran daging pedas hott mantap!' },
-            
-            // Sate-Satean (Skewers)
-            'sate-usus': { name: 'Sate Usus Ayam Kecap', price: 2000, category: 'sate', emoji: '🍢', desc: 'Sate usus bumbu marinasi kecap legi, siap dibakar anget.' },
-            'sate-puyuh': { name: 'Sate Telur Puyuh', price: 3500, category: 'sate', emoji: '🍢', desc: 'Sate telur puyuh gurih bumbu bacem coklat legi meresap.' },
-            'sate-kikil': { name: 'Sate Kikil Pedas', price: 2500, category: 'sate', emoji: '🍢', desc: 'Sate kikil kenyal-kenyal pedas manis gurih.' },
-            
-            // Makanan / Gorengan / Noodles
-            'mendoan': { name: 'Gorengan Tempe Mendoan', price: 1500, category: 'makanan', emoji: '🥞', desc: 'Tempe mendoan ambyar lebar anget-anget dicocol lombok.' },
-            'tahu-isi': { name: 'Tahu Isi Sayur', price: 1500, category: 'makanan', emoji: '🥟', desc: 'Tahu isi sayur wortel kubis kriuk gurih.' },
-            'mie-rebus': { name: 'Mie Rebus Polos', price: 5000, category: 'makanan', emoji: '🍜', desc: 'Mie rebus hangat racikan spesial ditambah bawang goreng harum.' },
+            // 🍜 MENU MAKANAN
+            'mie-rebus': { name: 'Mie Rebus', price: 5000, category: 'makanan', emoji: '🍜', desc: 'Mie rebus hangat racikan spesial ditambah bawang goreng harum.' },
             'mie-rebus-telur': { name: 'Mie Rebus + Telur', price: 8000, category: 'makanan', emoji: '🍳', desc: 'Mie rebus hangat ditambah telur rebus setengah matang makin mantap.' },
             'mie-rebus-telur-nasi': { name: 'Mie Rebus + Telur + Nasi', price: 12000, category: 'makanan', emoji: '🍚', desc: 'Sajian komplit juara lapar: mie rebus, telur, plus nasi pulen hangat.' },
-            'mie-goreng': { name: 'Mie Goreng Polos', price: 5000, category: 'makanan', emoji: '🥢', desc: 'Mie goreng gurih disajikan dengan taburan bawang goreng dan rawit.' },
+            'mie-goreng': { name: 'Mie Goreng', price: 5000, category: 'makanan', emoji: '🥢', desc: 'Mie goreng gurih disajikan dengan taburan bawang goreng dan rawit.' },
             'mie-goreng-telur': { name: 'Mie Goreng + Telur', price: 8000, category: 'makanan', emoji: '🍝', desc: 'Mie goreng makin spesial dikombinasikan dengan ceplok atau dadar.' },
             'mie-goreng-telur-nasi': { name: 'Mie Goreng + Telur + Nasi', price: 12000, category: 'makanan', emoji: '🍱', desc: 'Double kenyang mantap: porsi mie goreng lengkap dengan telur dan nasi.' },
             
-            // Wedangan / Minuman (Iconic Drinks)
-            'kopi-joss': { name: 'Kopi Joss (Arang Areng)', price: 5000, category: 'minuman', emoji: '☕', desc: 'Kopi hitam mantap dicemplungi arang membara khas Tugu Jogja!' },
-            'teh-anget': { name: 'Teh Anget Syahdu', price: 4000, category: 'minuman', emoji: '🍵', desc: 'Teh manis hangat dengan seduhan pekat kental wangi melati.' },
-            'es-teh': { name: 'Es Teh Segar', price: 4000, category: 'minuman', emoji: '🍹', desc: 'Kesegaran es teh legi legendaris pelipur lara.' },
-            'wedang-jahe': { name: 'Wedang Jahe Geprek', price: 5000, category: 'minuman', emoji: '🔥', desc: 'Air jahe asli geprek bakar berkhasiat menghangatkan raga.' },
-            'wedang-jeruk': { name: 'Wedang Jeruk Hangat', price: 4000, category: 'minuman', emoji: '🍊', desc: 'Perasan jeruk asli murni manis hangat segar.' },
-            'es-jeruk': { name: 'Es Jeruk Asli', price: 4000, category: 'minuman', emoji: '🥤', desc: 'Es jeruk dingin manis menggoda pas panas-panas.' },
+            // 🥤 MENU MINUMAN
+            'teh-anget': { name: 'Teh Anget', price: 4000, category: 'minuman', emoji: '🍵', desc: 'Teh manis hangat dengan seduhan pekat wangi melati.' },
+            'es-teh': { name: 'Es Teh', price: 4000, category: 'minuman', emoji: '🍹', desc: 'Kesegaran es teh legi legendaris pelipur lara.' },
+            'wedang-jeruk': { name: 'Wedang Jeruk', price: 4000, category: 'minuman', emoji: '🍊', desc: 'Perasan jeruk asli murni manis hangat segar.' },
+            'es-jeruk': { name: 'Es Jeruk', price: 4000, category: 'minuman', emoji: '🥤', desc: 'Es jeruk dingin manis menggoda pas panas-panas.' },
             'es-extra-joss': { name: 'Es Extra Joss', price: 4000, category: 'minuman', emoji: '⚡', desc: 'Minuman energi joss dingin penambah stamina lari malam.' },
-            'es-jossu': { name: 'Es Jossu (Susu)', price: 6000, category: 'minuman', emoji: '🥛', desc: 'Extra joss dikombinasikan susu kental manis legi pol.' },
+            'es-jossu': { name: 'Es Jossu', price: 6000, category: 'minuman', emoji: '🥛', desc: 'Extra joss dikombinasikan susu kental manis legi pol.' },
             'es-kuku-bima': { name: 'Es Kuku Bima', price: 4000, category: 'minuman', emoji: '🔋', desc: 'Es Kuku Bima anggur dingin segar bertenaga.' },
             'kuku-bima-susu': { name: 'Kuku Bima Susu', price: 6000, category: 'minuman', emoji: '🍼', desc: 'Kuku Bima anggur dicampur susu kental manis creamy segar.' }
         };
@@ -689,7 +669,7 @@
             }
         }
 
-        // Cart and search state
+        // Cart, filters and payment selection state
         let cart = {};
         let activeCategoryFilter = 'all';
         let searchQuery = '';
@@ -698,7 +678,7 @@
         // Dynamic funny warung status text list
         const statusPhrases = [
             "BUKA (mergo mas'e isih tangi)",
-            "BUKA (kompor joss areng murup terus!)",
+            "BUKA (kompor joss mie anget murup terus!)",
             "TUTUP SEGELAP MALAM (penjaga lagi nggemati pacare)",
             "SETENGAH BUKA (mas'e lagi tuku rokok)",
             "BUKA (delivery meluncur Yogyakarta-Sleman)",
@@ -719,7 +699,7 @@
             } else {
                 statusEl.className = "text-green-400 font-bold";
                 synthChime();
-                showToast("Status: Ayoo ngangkring mas!", "fa-utensils");
+                showToast("Status: Ayoo jajan mie anget mas!", "fa-utensils");
             }
         }
 
@@ -792,7 +772,6 @@
         function copyToClipboard(text) {
             const tempInput = document.createElement("textarea");
             tempInput.value = text;
-            // Prevent scrolling on focus / hidden attributes
             tempInput.style.top = "0";
             tempInput.style.left = "0";
             tempInput.style.position = "fixed";
@@ -901,13 +880,11 @@
             // Adjust headers depending on selected category
             const titles = {
                 'all': 'Semua Menu',
-                'sego': 'Sego Kucing Klasik',
-                'sate': 'Sate Baceman & Bakar',
-                'makanan': 'Mie & Gorengan Anget',
+                'makanan': 'Mie Olahan Anget',
                 'minuman': 'Wedangan Segar & Anget'
             };
             const emojis = {
-                'all': '✨', 'sego': '🍛', 'sate': '🍢', 'makanan': '🍜', 'minuman': '🥤'
+                'all': '✨', 'makanan': '🍜', 'minuman': '🥤'
             };
 
             document.getElementById('section-title').innerText = titles[cat] || 'Menu';
@@ -1132,8 +1109,6 @@
             msg += `🛒 *DAFTAR PESANAN:*\n`;
 
             let total = 0;
-            let segoList = [];
-            let sateList = [];
             let makananList = [];
             let minumanList = [];
 
@@ -1149,11 +1124,7 @@
 
                 const line = `  - ${qty}x ${item.name}${remarkString} [${formatRupiah(subTotal)}]`;
 
-                if (item.category === 'sego') {
-                    segoList.push(line);
-                } else if (item.category === 'sate') {
-                    sateList.push(line);
-                } else if (item.category === 'makanan') {
+                if (item.category === 'makanan') {
                     makananList.push(line);
                 } else {
                     minumanList.push(line);
@@ -1161,14 +1132,8 @@
             });
 
             // Structuring by category
-            if (segoList.length > 0) {
-                msg += `\n*🍛 Menu Sego:*\n` + segoList.join('\n') + `\n`;
-            }
-            if (sateList.length > 0) {
-                msg += `\n*🍢 Menu Sate:*\n` + sateList.join('\n') + `\n`;
-            }
             if (makananList.length > 0) {
-                msg += `\n*🍜 Mie & Gorengan:*\n` + makananList.join('\n') + `\n`;
+                msg += `\n*🍜 Makanan (Mie):*\n` + makananList.join('\n') + `\n`;
             }
             if (minumanList.length > 0) {
                 msg += `\n*🥤 Wedangan:*\n` + minumanList.join('\n') + `\n`;
@@ -1195,13 +1160,13 @@
             previewContainer.innerText = buildWhatsAppMessage();
         }
 
-        // Gamified pre-made packages lists for Decide-O-Matic wheel helper
+        // Gamified pre-made packages lists for Decide-O-Matic wheel helper using ONLY official user menu!
         const prepackagedDeals = [
-            { name: "Paket Wareg Gayeng", items: ["sego-teri", "sate-usus", "mendoan", "teh-anget"], price: 10500 },
-            { name: "Paket Melek Songo", items: ["sego-mercon", "sate-puyuh", "kopi-joss"], price: 12000 },
-            { name: "Paket Sederhana Nikmat", items: ["sego-tempe", "tahu-isi", "es-teh"], price: 8500 },
-            { name: "Paket Sultan Angkringan", items: ["sego-teri", "sego-mercon", "sate-usus", "sate-puyuh", "mendoan", "es-jossu"], price: 21000 },
-            { name: "Paket Jahe Hangat", items: ["sego-tempe", "mendoan", "wedang-jahe"], price: 9500 }
+            { name: "Paket Wareg Gayeng", items: ["mie-rebus-telur", "es-teh"], price: 12000 },
+            { name: "Paket Melek Songo", items: ["mie-goreng-telur", "es-extra-joss"], price: 12000 },
+            { name: "Paket Sederhana Nikmat", items: ["mie-rebus", "teh-anget"], price: 9000 },
+            { name: "Paket Komplit Syahdu", items: ["mie-goreng-telur-nasi", "es-jossu"], price: 18000 },
+            { name: "Paket Dobel Joss", items: ["mie-rebus-telur-nasi", "kuku-bima-susu"], price: 18000 }
         ];
         let spunPackageIndex = null;
 
@@ -1251,8 +1216,8 @@
         // Persistent localStorage Guestbook review wall
         const localReviewsKey = 'angkringan_reviews_v1';
         let defaultReviews = [
-            { name: "Bayu Sleman", rating: 5, text: "Kopi joss neng kene juwarak! Areng mbeluk, panas legit mantap, mendoane anget terus.", date: "14 Jul 2026" },
-            { name: "Mbak Ririn", rating: 4, text: "Sego kucing sambel terine pedese nagih tenan, pas banget dienggo kumpul konco kos.", date: "12 Jul 2026" },
+            { name: "Bayu Sleman", rating: 5, text: "Mie rebus plus endog kene pancen juwarak! Kuah lekoh anget tenan, wedang jeruk e asli seger.", date: "14 Jul 2026" },
+            { name: "Mbak Ririn", rating: 4, text: "Es jossu ne mantep legi creamy pol, pas banget dienggo kumpul kanca-kanca.", date: "12 Jul 2026" },
             { name: "Tasmen", rating: 5, text: "Website sing nggawe keren banget interaktif tenan! Muga-muga warunge tambah rame lancar!", date: "10 Jul 2026" }
         ];
 
