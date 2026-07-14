@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
     <!-- Google Fonts: Plus Jakarta Sans and Playfair Display -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght=0,600;0,800;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght=0,600;0,800;1,600;1,800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -23,70 +23,98 @@
                     },
                     colors: {
                         angkringan: {
-                            dark: '#120c08',
-                            wood: '#2c1b11',
-                            warm: '#442c1d',
-                            accent: '#e28743',
-                            light: '#f7f5f0',
-                            gold: '#fbbf24'
+                            dark: '#0f0a07',
+                            wood: '#23140b',
+                            warm: '#3b2214',
+                            accent: '#f28e2b',
+                            gold: '#ffb03b',
+                            light: '#FAF7F2',
+                            card: '#1a120c'
                         }
                     }
                 }
             }
         }
     </script>
+    
     <style>
-        /* Custom scrollbar */
+        /* Custom scrollbars styling */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #120c08;
+            background: #0f0a07;
         }
         ::-webkit-scrollbar-thumb {
-            background: #442c1d;
+            background: #3b2214;
             border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #e28743;
+            background: #f28e2b;
         }
-        /* Custom neon flicker animation for 24/7 */
+        
+        /* Neon Flickering Title effects */
         @keyframes flicker {
             0%, 18%, 22%, 25%, 53%, 57%, 100% {
-                text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #e28743, 0 0 40px #e28743, 0 0 80px #e28743;
+                text-shadow: 0 0 4px #fff, 0 0 11px #fff, 0 0 19px #f28e2b, 0 0 40px #f28e2b, 0 0 80px #f28e2b;
             }
             20%, 24%, 55% {
                 text-shadow: none;
             }
         }
         .neon-flicker {
-            animation: flicker 3s infinite alternate;
+            animation: flicker 4s infinite alternate;
+        }
+
+        /* Glowing accents for interactive items */
+        .wood-glow:hover {
+            box-shadow: 0 10px 25px -5px rgba(242, 142, 43, 0.15);
+        }
+
+        /* Coffee steam animation */
+        @keyframes steam {
+            0% { transform: translateY(0) scaleX(1); opacity: 0.2; }
+            50% { transform: translateY(-5px) scaleX(1.1); opacity: 0.4; }
+            100% { transform: translateY(-10px) scaleX(1); opacity: 0; }
+        }
+        .steam-line {
+            animation: steam 2.5s infinite ease-out;
         }
     </style>
 </head>
 <body class="bg-angkringan-dark text-stone-200 font-sans min-h-screen selection:bg-angkringan-accent selection:text-white pb-24">
 
     <!-- Navigation Bar -->
-    <nav class="sticky top-0 z-50 bg-angkringan-dark/95 backdrop-blur-md border-b border-angkringan-warm shadow-xl">
+    <nav class="sticky top-0 z-40 bg-angkringan-dark/95 backdrop-blur-md border-b border-angkringan-warm/80 shadow-2xl">
         <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <!-- Brand Logo Info -->
             <div class="flex items-center gap-3">
-                <div class="bg-angkringan-accent text-angkringan-dark p-2 rounded-xl font-bold flex items-center justify-center shadow-lg">
-                    <span class="text-xl">☕</span>
+                <div class="bg-gradient-to-br from-angkringan-accent to-angkringan-gold text-angkringan-dark p-2.5 rounded-2xl font-bold flex items-center justify-center shadow-lg relative group">
+                    <span class="text-xl transform group-hover:rotate-12 transition-transform">☕</span>
+                    <!-- Miniature steam simulation -->
+                    <span class="absolute top-1 text-[8px] steam-line opacity-80">♨</span>
                 </div>
                 <div>
-                    <h1 class="font-extrabold text-lg tracking-wide text-white flex items-center gap-1.5">
+                    <h1 class="font-extrabold text-sm sm:text-lg tracking-wide text-white flex items-center gap-1.5">
                         ANGKRINGAN G-COFFE <span class="text-xs bg-red-600 text-white px-2 py-0.5 rounded-full font-black animate-pulse">24/7</span>
                     </h1>
-                    <p class="text-[10px] text-stone-400 tracking-wider uppercase font-medium">Buka Tutup Sak Geleme!</p>
+                    <p class="text-[9px] sm:text-[10px] text-stone-400 tracking-wider uppercase font-medium">Buka Tutup Sak Geleme!</p>
                 </div>
             </div>
             
+            <!-- Navbar Action Area -->
             <div class="flex items-center gap-2">
-                <!-- Floating Scroll to Menu Button -->
-                <a href="#menu-makanan" class="bg-angkringan-warm/60 hover:bg-angkringan-accent/20 border border-angkringan-warm text-stone-200 hover:text-angkringan-accent px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-300">
-                    <i class="fa-solid fa-utensils mr-1"></i> Menu
+                <!-- Sound Toggle button -->
+                <button onclick="toggleAudio()" id="sound-btn" class="bg-angkringan-warm/50 hover:bg-angkringan-warm border border-angkringan-warm/60 p-2.5 rounded-xl text-stone-300 hover:text-angkringan-accent transition-all text-xs" title="Toggle Sound FX">
+                    <i class="fa-solid fa-volume-high"></i>
+                </button>
+
+                <!-- Quick Menu Scroll Trigger -->
+                <a href="#menu-makanan" onclick="synthPop()" class="hidden sm:inline-flex bg-angkringan-warm/40 hover:bg-angkringan-accent/20 border border-angkringan-warm text-stone-200 hover:text-angkringan-accent px-3 py-2 rounded-xl text-xs font-semibold transition-all duration-300 items-center gap-1.5">
+                    <i class="fa-solid fa-utensils"></i> List Menu
                 </a>
-                <!-- Cart Trigger Button -->
+                
+                <!-- Open Cart Button -->
                 <button onclick="toggleCartModal()" class="relative bg-angkringan-accent text-angkringan-dark p-2.5 rounded-xl font-bold hover:scale-105 active:scale-95 transition-all flex items-center gap-2 shadow-lg shadow-angkringan-accent/20">
                     <i class="fa-solid fa-shopping-basket text-lg"></i>
                     <span id="cart-count-badge" class="absolute -top-1.5 -right-1.5 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full border-2 border-angkringan-dark hidden">0</span>
@@ -96,446 +124,174 @@
     </nav>
 
     <!-- Hero / Header Section -->
-    <header class="relative py-16 px-4 overflow-hidden bg-gradient-to-b from-angkringan-wood to-angkringan-dark border-b border-angkringan-warm/40">
-        <!-- Absolute Background Overlay -->
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-angkringan-accent/10 via-transparent to-transparent pointer-events-none"></div>
+    <header class="relative py-20 px-4 overflow-hidden bg-gradient-to-b from-angkringan-wood to-angkringan-dark border-b border-angkringan-warm/30">
+        <!-- Overlay for atmospheric darkness and ambient lights -->
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-angkringan-accent/15 via-transparent to-transparent pointer-events-none"></div>
         
         <div class="max-w-4xl mx-auto text-center relative z-10">
-            <!-- Neon Glowing Badge -->
-            <div class="inline-block mb-4 px-4 py-1.5 bg-angkringan-dark/80 border border-angkringan-accent/40 rounded-full text-xs font-bold text-angkringan-accent tracking-widest uppercase shadow-inner">
-                <i class="fa-solid fa-circle-check text-green-500 mr-1.5 animate-pulse"></i> Sing Penting Isih Gelem Nglayani
+            <!-- Humor Live Status Indicator Widget -->
+            <div id="status-card" class="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-angkringan-dark/90 border border-angkringan-accent/30 rounded-2xl text-xs font-medium shadow-2xl">
+                <span class="flex h-2.5 w-2.5 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                </span>
+                <span class="text-stone-300">Status Warung Saiki: <strong id="live-status-text" class="text-green-400 font-bold">BUKA (mergo mas'e isih tangi)</strong></span>
+                <button onclick="toggleFunnies()" class="ml-2 text-angkringan-accent hover:text-white transition text-[10px] bg-angkringan-warm/60 px-2 py-0.5 rounded-lg border border-stone-800">Ubah Status</button>
             </div>
             
-            <!-- Main Title with Local Vibe -->
-            <h2 class="text-4xl md:text-6xl font-extrabold font-serif tracking-tight text-white mb-4">
+            <!-- Hero Header Title -->
+            <h2 class="text-4xl md:text-7xl font-black font-serif tracking-tight text-white mb-4 leading-none">
                 ☕ ANGKRINGAN <br class="sm:hidden"> G-COFFE <span class="text-angkringan-gold neon-flicker">24/7</span> 🍜
             </h2>
             
             <!-- Authentic Tagline -->
-            <p class="text-2xl md:text-3xl font-serif italic text-angkringan-accent font-medium mb-2">
+            <p class="text-2xl md:text-4xl font-serif italic text-angkringan-accent font-medium mb-4">
                 "Buka Tutup Sak Geleme!"
             </p>
-            <p class="text-stone-400 text-sm max-w-lg mx-auto font-medium">
-                Sego kucing, mie anget, lan wedangan syahdu. Warung angkringan santai rukun gawe wareg lan gayeng.
+            <p class="text-stone-400 text-sm md:text-base max-w-xl mx-auto font-medium leading-relaxed">
+                Sego kucing teri, sate usus bakar, gorengan mendoan, lan kopi joss areng membara. Sederhana, anget, gayeng, rukun, lan nggarai wareg.
             </p>
 
-            <!-- Quick Action Info Badge -->
-            <div class="mt-8 flex flex-wrap justify-center gap-3">
-                <span class="bg-angkringan-dark/60 border border-stone-800 px-3.5 py-2 rounded-2xl text-xs flex items-center gap-2">
+            <!-- Quick Action Icons/Badges -->
+            <div class="mt-8 flex flex-wrap justify-center gap-3.5">
+                <span class="bg-angkringan-dark/70 border border-stone-800/80 px-4 py-2.5 rounded-2xl text-xs flex items-center gap-2.5 shadow-xl">
                     <i class="fa-brands fa-whatsapp text-green-500 text-lg"></i>
-                    <span>Pesan via WA: <strong class="text-stone-100">0895-1909-7381</strong></span>
+                    <span>Pesan via WA: <strong class="text-stone-100 hover:text-angkringan-accent cursor-pointer">0895-1909-7381</strong></span>
                 </span>
-                <span class="bg-angkringan-dark/60 border border-stone-800 px-3.5 py-2 rounded-2xl text-xs flex items-center gap-2">
+                <span class="bg-angkringan-dark/70 border border-stone-800/80 px-4 py-2.5 rounded-2xl text-xs flex items-center gap-2.5 shadow-xl">
                     <i class="fa-solid fa-motorcycle text-angkringan-accent text-base"></i>
-                    <span>Delivery Order <strong class="text-stone-100">Siap Kirim</strong></span>
+                    <span>Sleman-Jogja <strong class="text-stone-100">Siap Kirim Delivery</strong></span>
                 </span>
             </div>
         </div>
     </header>
 
+    <!-- Gamified Help Decide Widget (Decide-O-Matic) -->
+    <section class="max-w-6xl mx-auto px-4 pt-10">
+        <div class="bg-gradient-to-r from-angkringan-card to-angkringan-wood border border-angkringan-warm/60 rounded-3xl p-6 md:p-8 shadow-xl relative overflow-hidden flex flex-col md:flex-row items-center gap-6">
+            <div class="absolute top-0 right-0 w-36 h-36 bg-angkringan-accent/5 rounded-full blur-2xl pointer-events-none"></div>
+            
+            <div class="flex-1 space-y-2">
+                <span class="bg-angkringan-accent/10 border border-angkringan-accent/30 text-angkringan-accent text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider inline-block">Bingung Milih Menu? 🤔</span>
+                <h3 class="text-xl md:text-2xl font-bold text-white">Rekomendasi Paket Sak Geleme</h3>
+                <p class="text-xs text-stone-400">Tekan tombol ing samping kanggo milih paket panganan otomatis sing maknyus lan pas karo dompetmu!</p>
+                
+                <!-- Displayed Recommended Package -->
+                <div id="pkg-display" class="mt-4 p-4 bg-angkringan-dark/80 rounded-2xl border border-stone-800 hidden transform scale-95 transition-all duration-300">
+                    <h4 class="font-extrabold text-angkringan-gold text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-gift"></i> <span id="pkg-name">Paket Wareg Syahdu</span>
+                    </h4>
+                    <p id="pkg-items" class="text-xs text-stone-300 mt-1">Sego Kucing + Sate Usus + Es Teh Anget</p>
+                    <div class="flex items-center justify-between mt-3 pt-2.5 border-t border-stone-800/60">
+                        <span id="pkg-price" class="font-bold text-angkringan-accent text-sm">Rp12.000</span>
+                        <button onclick="addPackageToCart()" class="bg-green-600 hover:bg-green-500 text-white font-extrabold text-[10px] px-3.5 py-1.5 rounded-lg transition flex items-center gap-1 shadow-lg">
+                            <i class="fa-solid fa-plus-circle"></i> Lebokno Keranjang
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Button Area -->
+            <div class="shrink-0">
+                <button onclick="spinForMenu()" class="relative group bg-gradient-to-br from-angkringan-accent to-angkringan-gold text-angkringan-dark font-extrabold text-sm px-6 py-4 rounded-2xl shadow-xl transition active:scale-95 flex flex-col items-center gap-1.5">
+                    <span class="absolute inset-0 bg-white/20 rounded-2xl scale-0 group-hover:scale-100 transition-transform duration-300 origin-center opacity-0 group-hover:opacity-100"></span>
+                    <i class="fa-solid fa-shuffle text-xl animate-spin" style="animation-duration: 4s;"></i>
+                    <span>PILIKNO MENU!</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- Main Food & Drink Container -->
     <main class="max-w-6xl mx-auto px-4 py-12">
         
-        <!-- Toggle Tabs for Quick Navigation -->
-        <div class="flex justify-center gap-4 mb-10">
-            <button onclick="scrollToSection('menu-makanan')" class="bg-angkringan-warm text-white px-5 py-2.5 rounded-full font-bold text-sm hover:bg-angkringan-accent transition duration-300 flex items-center gap-2 shadow-md">
-                🍜 Menu Makanan
-            </button>
-            <button onclick="scrollToSection('menu-minuman')" class="bg-angkringan-warm text-white px-5 py-2.5 rounded-full font-bold text-sm hover:bg-angkringan-accent transition duration-300 flex items-center gap-2 shadow-md">
-                🥤 Menu Minuman
-            </button>
-            <button onclick="scrollToSection('informasi-warung')" class="bg-stone-800 text-stone-300 px-5 py-2.5 rounded-full font-bold text-sm hover:bg-stone-700 transition duration-300 flex items-center gap-2 shadow-md">
-                📢 Info Penting
-            </button>
+        <!-- Search and Live Filters Row -->
+        <div class="mb-10 space-y-4">
+            <!-- Custom Search bar -->
+            <div class="relative max-w-md mx-auto">
+                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-500">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+                <input type="text" id="menu-search" oninput="filterMenuByQuery()" placeholder="Goleki sego, sate, wedangan..." class="w-full bg-angkringan-card/80 border border-stone-800 focus:border-angkringan-accent/80 rounded-2xl pl-10 pr-4 py-3 text-sm text-stone-100 placeholder-stone-600 focus:outline-none transition-all shadow-inner">
+            </div>
+
+            <!-- Dynamic Interactive Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-2">
+                <button onclick="filterCategory('all')" id="tab-all" class="filter-tab active-tab bg-angkringan-accent text-angkringan-dark px-4 py-2 rounded-full font-bold text-xs transition duration-200">
+                    ✨ Semua Menu
+                </button>
+                <button onclick="filterCategory('sego')" id="tab-sego" class="filter-tab bg-angkringan-warm/50 text-stone-300 hover:bg-angkringan-warm px-4 py-2 rounded-full font-bold text-xs transition duration-200">
+                    🍛 Sego Kucing
+                </button>
+                <button onclick="filterCategory('sate')" id="tab-sate" class="filter-tab bg-angkringan-warm/50 text-stone-300 hover:bg-angkringan-warm px-4 py-2 rounded-full font-bold text-xs transition duration-200">
+                    🍢 Sate-Satean
+                </button>
+                <button onclick="filterCategory('makanan')" id="tab-makanan" class="filter-tab bg-angkringan-warm/50 text-stone-300 hover:bg-angkringan-warm px-4 py-2 rounded-full font-bold text-xs transition duration-200">
+                    🍜 Mie & Gorengan
+                </button>
+                <button onclick="filterCategory('minuman')" id="tab-minuman" class="filter-tab bg-angkringan-warm/50 text-stone-300 hover:bg-angkringan-warm px-4 py-2 rounded-full font-bold text-xs transition duration-200">
+                    🥤 Wedangan (Minuman)
+                </button>
+            </div>
         </div>
 
-        <!-- Makanan Section -->
-        <section id="menu-makanan" class="mb-16 scroll-mt-24">
-            <div class="flex items-center gap-3 mb-6 border-b border-angkringan-warm/60 pb-3">
-                <span class="text-2xl">🍜</span>
-                <h3 class="text-2xl font-bold text-white tracking-wide uppercase">Menu Makanan</h3>
-                <span class="ml-auto text-xs text-stone-500 font-medium">Olahan Spesial</span>
+        <!-- MENU ITEMS COMPILATION GRID -->
+        <section class="mb-16">
+            <div class="flex items-center gap-3 mb-8 border-b border-angkringan-warm/60 pb-3">
+                <span class="text-2xl" id="section-emoji">✨</span>
+                <h3 class="text-2xl font-bold text-white tracking-wide uppercase" id="section-title">Menu Angkringan</h3>
+                <span class="ml-auto text-xs text-stone-500 font-medium">Bahan Premium & Fresh</span>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Food Item 1 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all duration-300 group hover:shadow-xl hover:shadow-angkringan-accent/5">
-                    <div class="flex gap-4">
-                        <div class="w-20 h-20 bg-stone-800 rounded-xl overflow-hidden shrink-0 flex items-center justify-center text-3xl select-none group-hover:scale-105 transition-transform duration-300">
-                            🍜
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors">Mie Rebus</h4>
-                            <p class="text-xs text-stone-400 mt-1">Mie rebus hangat racikan spesial ditambah bawang goreng harum.</p>
-                            <span class="inline-block mt-2 font-black text-angkringan-accent text-base">Rp5.000</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2.5 mt-4 pt-3 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Atur porsi:</span>
-                            <div class="flex items-center gap-2.5">
-                                <button onclick="changeQty('mie-rebus', -1)" class="w-8 h-8 rounded-lg bg-stone-800 hover:bg-stone-700 active:scale-90 flex items-center justify-center text-stone-300 transition-all font-bold">-</button>
-                                <span id="qty-mie-rebus" class="w-6 text-center font-bold text-sm">0</span>
-                                <button onclick="changeQty('mie-rebus', 1)" class="w-8 h-8 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 active:scale-90 flex items-center justify-center font-bold transition-all">+</button>
-                            </div>
-                        </div>
-                        <button onclick="orderSingleItemDirectly('mie-rebus')" class="w-full mt-1 bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/30 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Pesan Langsung via WA
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Food Item 2 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all duration-300 group hover:shadow-xl hover:shadow-angkringan-accent/5">
-                    <div class="flex gap-4">
-                        <div class="w-20 h-20 bg-stone-800 rounded-xl overflow-hidden shrink-0 flex items-center justify-center text-3xl select-none group-hover:scale-105 transition-transform duration-300">
-                            🍳
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors">Mie Rebus + Telur</h4>
-                            <p class="text-xs text-stone-400 mt-1">Mie rebus hangat ditambah telur rebus / setengah matang makin mantap.</p>
-                            <span class="inline-block mt-2 font-black text-angkringan-accent text-base">Rp8.000</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2.5 mt-4 pt-3 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Atur porsi:</span>
-                            <div class="flex items-center gap-2.5">
-                                <button onclick="changeQty('mie-rebus-telur', -1)" class="w-8 h-8 rounded-lg bg-stone-800 hover:bg-stone-700 active:scale-90 flex items-center justify-center text-stone-300 transition-all font-bold">-</button>
-                                <span id="qty-mie-rebus-telur" class="w-6 text-center font-bold text-sm">0</span>
-                                <button onclick="changeQty('mie-rebus-telur', 1)" class="w-8 h-8 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 active:scale-90 flex items-center justify-center font-bold transition-all">+</button>
-                            </div>
-                        </div>
-                        <button onclick="orderSingleItemDirectly('mie-rebus-telur')" class="w-full mt-1 bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/30 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Pesan Langsung via WA
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Food Item 3 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all duration-300 group hover:shadow-xl hover:shadow-angkringan-accent/5">
-                    <div class="flex gap-4">
-                        <div class="w-20 h-20 bg-stone-800 rounded-xl overflow-hidden shrink-0 flex items-center justify-center text-3xl select-none group-hover:scale-105 transition-transform duration-300">
-                            🍚
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors">Mie Rebus + Telur + Nasi</h4>
-                            <p class="text-xs text-stone-400 mt-1">Sajian komplit juara lapar: mie rebus, telur, plus nasi pulen hangat.</p>
-                            <span class="inline-block mt-2 font-black text-angkringan-accent text-base">Rp12.000</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2.5 mt-4 pt-3 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Atur porsi:</span>
-                            <div class="flex items-center gap-2.5">
-                                <button onclick="changeQty('mie-rebus-telur-nasi', -1)" class="w-8 h-8 rounded-lg bg-stone-800 hover:bg-stone-700 active:scale-90 flex items-center justify-center text-stone-300 transition-all font-bold">-</button>
-                                <span id="qty-mie-rebus-telur-nasi" class="w-6 text-center font-bold text-sm">0</span>
-                                <button onclick="changeQty('mie-rebus-telur-nasi', 1)" class="w-8 h-8 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 active:scale-90 flex items-center justify-center font-bold transition-all">+</button>
-                            </div>
-                        </div>
-                        <button onclick="orderSingleItemDirectly('mie-rebus-telur-nasi')" class="w-full mt-1 bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/30 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Pesan Langsung via WA
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Food Item 4 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all duration-300 group hover:shadow-xl hover:shadow-angkringan-accent/5">
-                    <div class="flex gap-4">
-                        <div class="w-20 h-20 bg-stone-800 rounded-xl overflow-hidden shrink-0 flex items-center justify-center text-3xl select-none group-hover:scale-105 transition-transform duration-300">
-                            🥢
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors">Mie Goreng</h4>
-                            <p class="text-xs text-stone-400 mt-1">Mie goreng gurih disajikan dengan taburan bawang goreng dan rawit.</p>
-                            <span class="inline-block mt-2 font-black text-angkringan-accent text-base">Rp5.000</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2.5 mt-4 pt-3 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Atur porsi:</span>
-                            <div class="flex items-center gap-2.5">
-                                <button onclick="changeQty('mie-goreng', -1)" class="w-8 h-8 rounded-lg bg-stone-800 hover:bg-stone-700 active:scale-90 flex items-center justify-center text-stone-300 transition-all font-bold">-</button>
-                                <span id="qty-mie-goreng" class="w-6 text-center font-bold text-sm">0</span>
-                                <button onclick="changeQty('mie-goreng', 1)" class="w-8 h-8 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 active:scale-90 flex items-center justify-center font-bold transition-all">+</button>
-                            </div>
-                        </div>
-                        <button onclick="orderSingleItemDirectly('mie-goreng')" class="w-full mt-1 bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/30 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Pesan Langsung via WA
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Food Item 5 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all duration-300 group hover:shadow-xl hover:shadow-angkringan-accent/5">
-                    <div class="flex gap-4">
-                        <div class="w-20 h-20 bg-stone-800 rounded-xl overflow-hidden shrink-0 flex items-center justify-center text-3xl select-none group-hover:scale-105 transition-transform duration-300">
-                            🍛
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors">Mie Goreng + Telur</h4>
-                            <p class="text-xs text-stone-400 mt-1">Mie goreng makin spesial dikombinasikan dengan ceplok atau dadar.</p>
-                            <span class="inline-block mt-2 font-black text-angkringan-accent text-base">Rp8.000</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2.5 mt-4 pt-3 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Atur porsi:</span>
-                            <div class="flex items-center gap-2.5">
-                                <button onclick="changeQty('mie-goreng-telur', -1)" class="w-8 h-8 rounded-lg bg-stone-800 hover:bg-stone-700 active:scale-90 flex items-center justify-center text-stone-300 transition-all font-bold">-</button>
-                                <span id="qty-mie-goreng-telur" class="w-6 text-center font-bold text-sm">0</span>
-                                <button onclick="changeQty('mie-goreng-telur', 1)" class="w-8 h-8 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 active:scale-90 flex items-center justify-center font-bold transition-all">+</button>
-                            </div>
-                        </div>
-                        <button onclick="orderSingleItemDirectly('mie-goreng-telur')" class="w-full mt-1 bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/30 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Pesan Langsung via WA
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Food Item 6 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all duration-300 group hover:shadow-xl hover:shadow-angkringan-accent/5">
-                    <div class="flex gap-4">
-                        <div class="w-20 h-20 bg-stone-800 rounded-xl overflow-hidden shrink-0 flex items-center justify-center text-3xl select-none group-hover:scale-105 transition-transform duration-300">
-                            📦
-                        </div>
-                        <div class="flex-1">
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors">Mie Goreng + Telur + Nasi</h4>
-                            <p class="text-xs text-stone-400 mt-1">Double kenyang mantap: porsi mie goreng lengkap dengan telur dan nasi.</p>
-                            <span class="inline-block mt-2 font-black text-angkringan-accent text-base">Rp12.000</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2.5 mt-4 pt-3 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Atur porsi:</span>
-                            <div class="flex items-center gap-2.5">
-                                <button onclick="changeQty('mie-goreng-telur-nasi', -1)" class="w-8 h-8 rounded-lg bg-stone-800 hover:bg-stone-700 active:scale-90 flex items-center justify-center text-stone-300 transition-all font-bold">-</button>
-                                <span id="qty-mie-goreng-telur-nasi" class="w-6 text-center font-bold text-sm">0</span>
-                                <button onclick="changeQty('mie-goreng-telur-nasi', 1)" class="w-8 h-8 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 active:scale-90 flex items-center justify-center font-bold transition-all">+</button>
-                            </div>
-                        </div>
-                        <button onclick="orderSingleItemDirectly('mie-goreng-telur-nasi')" class="w-full mt-1 bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/30 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-2">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Pesan Langsung via WA
-                        </button>
-                    </div>
-                </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="menu-grid-container">
+                <!-- Javascript will load the robust custom menu database here -->
             </div>
         </section>
 
-        <!-- Minuman Section -->
-        <section id="menu-minuman" class="mb-16 scroll-mt-24">
+        <!-- Tembok Sambat & Review (Guestbook Board) -->
+        <section class="mb-16">
             <div class="flex items-center gap-3 mb-6 border-b border-angkringan-warm/60 pb-3">
-                <span class="text-2xl">🥤</span>
-                <h3 class="text-2xl font-bold text-white tracking-wide uppercase">Menu Minuman</h3>
-                <span class="ml-auto text-xs text-stone-500 font-medium">Segar & Hangat</span>
+                <span class="text-2xl">📝</span>
+                <h3 class="text-2xl font-bold text-white tracking-wide uppercase">Tembok Sambat & Review</h3>
+                <span class="ml-auto text-xs text-stone-500 font-medium">Sambat Tenang Bebas</span>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Drink Item 1 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-amber-950/40 border border-angkringan-warm rounded-xl flex items-center justify-center text-xl group-hover:scale-105 transition-transform duration-300">
-                            ☕
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Add review column -->
+                <div class="bg-angkringan-card border border-stone-800/80 p-5 rounded-3xl space-y-4">
+                    <h4 class="font-bold text-white text-sm">Tinggalno Catetanmu / Review</h4>
+                    <div class="space-y-3 text-xs">
+                        <div>
+                            <label class="block text-stone-400 mb-1">Jenengmu (Nama)</label>
+                            <input type="text" id="review-name" placeholder="Mas/Mbak..." class="w-full bg-angkringan-dark border border-stone-800 focus:border-angkringan-accent rounded-xl px-3 py-2 text-stone-100 outline-none">
                         </div>
                         <div>
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors text-sm">Teh Anget</h4>
-                            <span class="font-black text-angkringan-accent text-sm">Rp4.000</span>
+                            <label class="block text-stone-400 mb-1">Roso Panganan (Rating)</label>
+                            <select id="review-rating" class="w-full bg-angkringan-dark border border-stone-800 focus:border-angkringan-accent rounded-xl px-3 py-2 text-stone-100 outline-none">
+                                <option value="5">⭐⭐⭐⭐⭐ Enak Pol (Mantap Jiwo)</option>
+                                <option value="4">⭐⭐⭐⭐ Wareg Tenan (Cocok Dompet)</option>
+                                <option value="3">⭐⭐⭐ Mayan Lah (Standar)</option>
+                                <option value="2">⭐⭐ Kurang Areng (Kurang Joss)</option>
+                                <option value="1">⭐ Sengit Mas (Horeg)</option>
+                            </select>
                         </div>
-                    </div>
-                    <div class="flex flex-col gap-2 mt-3 pt-2.5 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Jumlah:</span>
-                            <div class="flex items-center gap-2">
-                                <button onclick="changeQty('teh-anget', -1)" class="w-7 h-7 rounded-lg bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-xs font-bold">-</button>
-                                <span id="qty-teh-anget" class="w-5 text-center text-xs font-bold">0</span>
-                                <button onclick="changeQty('teh-anget', 1)" class="w-7 h-7 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 flex items-center justify-center text-xs font-bold">+</button>
-                            </div>
+                        <div>
+                            <label class="block text-stone-400 mb-1">Sambat / Kritik / Pujian (Ulasan)</label>
+                            <textarea id="review-text" rows="3" placeholder="Sego kucingmu sambele pedes tenan mas..." class="w-full bg-angkringan-dark border border-stone-800 focus:border-angkringan-accent rounded-xl px-3 py-2 text-stone-100 outline-none resize-none"></textarea>
                         </div>
-                        <button onclick="orderSingleItemDirectly('teh-anget')" class="w-full bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/20 py-1.5 rounded-lg text-[10px] font-bold transition-all flex items-center justify-center gap-1.5">
-                            <i class="fa-brands fa-whatsapp"></i> Pesan Langsung
+                        <button onclick="submitReview()" class="w-full bg-angkringan-accent text-angkringan-dark font-black py-2.5 rounded-xl hover:bg-white active:scale-95 transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-paper-plane"></i> Kirim Sambatan
                         </button>
                     </div>
                 </div>
 
-                <!-- Drink Item 2 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-amber-950/40 border border-angkringan-warm rounded-xl flex items-center justify-center text-xl group-hover:scale-105 transition-transform duration-300">
-                            🍹
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors text-sm">Es Teh</h4>
-                            <span class="font-black text-angkringan-accent text-sm">Rp4.000</span>
-                        </div>
+                <!-- Live comments wall columns -->
+                <div class="md:col-span-2 bg-stone-900/40 border border-stone-800/60 p-5 rounded-3xl flex flex-col justify-between">
+                    <div class="space-y-4 max-h-[300px] overflow-y-auto pr-2" id="reviews-board">
+                        <!-- Default placeholder or loaded comments -->
                     </div>
-                    <div class="flex flex-col gap-2 mt-3 pt-2.5 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Jumlah:</span>
-                            <div class="flex items-center gap-2">
-                                <button onclick="changeQty('es-teh', -1)" class="w-7 h-7 rounded-lg bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-xs font-bold">-</button>
-                                <span id="qty-es-teh" class="w-5 text-center text-xs font-bold">0</span>
-                                <button onclick="changeQty('es-teh', 1)" class="w-7 h-7 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 flex items-center justify-center text-xs font-bold">+</button>
-                            </div>
-                        </div>
-                        <button onclick="orderSingleItemDirectly('es-teh')" class="w-full bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/20 py-1.5 rounded-lg text-[10px] font-bold transition-all flex items-center justify-center gap-1.5">
-                            <i class="fa-brands fa-whatsapp"></i> Pesan Langsung
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Drink Item 3 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-amber-950/40 border border-angkringan-warm rounded-xl flex items-center justify-center text-xl group-hover:scale-105 transition-transform duration-300">
-                            🍊
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors text-sm">Wedang Jeruk</h4>
-                            <span class="font-black text-angkringan-accent text-sm">Rp4.000</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2 mt-3 pt-2.5 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Jumlah:</span>
-                            <div class="flex items-center gap-2">
-                                <button onclick="changeQty('wedang-jeruk', -1)" class="w-7 h-7 rounded-lg bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-xs font-bold">-</button>
-                                <span id="qty-wedang-jeruk" class="w-5 text-center text-xs font-bold">0</span>
-                                <button onclick="changeQty('wedang-jeruk', 1)" class="w-7 h-7 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 flex items-center justify-center text-xs font-bold">+</button>
-                            </div>
-                        </div>
-                        <button onclick="orderSingleItemDirectly('wedang-jeruk')" class="w-full bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/20 py-1.5 rounded-lg text-[10px] font-bold transition-all flex items-center justify-center gap-1.5">
-                            <i class="fa-brands fa-whatsapp"></i> Pesan Langsung
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Drink Item 4 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-amber-950/40 border border-angkringan-warm rounded-xl flex items-center justify-center text-xl group-hover:scale-105 transition-transform duration-300">
-                            🥤
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors text-sm">Es Jeruk</h4>
-                            <span class="font-black text-angkringan-accent text-sm">Rp4.000</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2 mt-3 pt-2.5 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Jumlah:</span>
-                            <div class="flex items-center gap-2">
-                                <button onclick="changeQty('es-jeruk', -1)" class="w-7 h-7 rounded-lg bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-xs font-bold">-</button>
-                                <span id="qty-es-jeruk" class="w-5 text-center text-xs font-bold">0</span>
-                                <button onclick="changeQty('es-jeruk', 1)" class="w-7 h-7 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 flex items-center justify-center text-xs font-bold">+</button>
-                            </div>
-                        </div>
-                        <button onclick="orderSingleItemDirectly('es-jeruk')" class="w-full bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/20 py-1.5 rounded-lg text-[10px] font-bold transition-all flex items-center justify-center gap-1.5">
-                            <i class="fa-brands fa-whatsapp"></i> Pesan Langsung
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Drink Item 5 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-amber-950/40 border border-angkringan-warm rounded-xl flex items-center justify-center text-xl group-hover:scale-105 transition-transform duration-300">
-                            ⚡
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors text-sm">Es Extra Joss</h4>
-                            <span class="font-black text-angkringan-accent text-sm">Rp4.000</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2 mt-3 pt-2.5 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Jumlah:</span>
-                            <div class="flex items-center gap-2">
-                                <button onclick="changeQty('es-extra-joss', -1)" class="w-7 h-7 rounded-lg bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-xs font-bold">-</button>
-                                <span id="qty-es-extra-joss" class="w-5 text-center text-xs font-bold">0</span>
-                                <button onclick="changeQty('es-extra-joss', 1)" class="w-7 h-7 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 flex items-center justify-center text-xs font-bold">+</button>
-                            </div>
-                        </div>
-                        <button onclick="orderSingleItemDirectly('es-extra-joss')" class="w-full bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/20 py-1.5 rounded-lg text-[10px] font-bold transition-all flex items-center justify-center gap-1.5">
-                            <i class="fa-brands fa-whatsapp"></i> Pesan Langsung
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Drink Item 6 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-amber-950/40 border border-angkringan-warm rounded-xl flex items-center justify-center text-xl group-hover:scale-105 transition-transform duration-300">
-                            🥛
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors text-sm">Es Jossu</h4>
-                            <span class="font-black text-angkringan-accent text-sm">Rp6.000</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2 mt-3 pt-2.5 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Jumlah:</span>
-                            <div class="flex items-center gap-2">
-                                <button onclick="changeQty('es-jossu', -1)" class="w-7 h-7 rounded-lg bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-xs font-bold">-</button>
-                                <span id="qty-es-jossu" class="w-5 text-center text-xs font-bold">0</span>
-                                <button onclick="changeQty('es-jossu', 1)" class="w-7 h-7 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 flex items-center justify-center text-xs font-bold">+</button>
-                            </div>
-                        </div>
-                        <button onclick="orderSingleItemDirectly('es-jossu')" class="w-full bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/20 py-1.5 rounded-lg text-[10px] font-bold transition-all flex items-center justify-center gap-1.5">
-                            <i class="fa-brands fa-whatsapp"></i> Pesan Langsung
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Drink Item 7 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-amber-950/40 border border-angkringan-warm rounded-xl flex items-center justify-center text-xl group-hover:scale-105 transition-transform duration-300">
-                            🔋
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors text-sm">Es Kuku Bima</h4>
-                            <span class="font-black text-angkringan-accent text-sm">Rp4.000</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2 mt-3 pt-2.5 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Jumlah:</span>
-                            <div class="flex items-center gap-2">
-                                <button onclick="changeQty('es-kuku-bima', -1)" class="w-7 h-7 rounded-lg bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-xs font-bold">-</button>
-                                <span id="qty-es-kuku-bima" class="w-5 text-center text-xs font-bold">0</span>
-                                <button onclick="changeQty('es-kuku-bima', 1)" class="w-7 h-7 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 flex items-center justify-center text-xs font-bold">+</button>
-                            </div>
-                        </div>
-                        <button onclick="orderSingleItemDirectly('es-kuku-bima')" class="w-full bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/20 py-1.5 rounded-lg text-[10px] font-bold transition-all flex items-center justify-center gap-1.5">
-                            <i class="fa-brands fa-whatsapp"></i> Pesan Langsung
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Drink Item 8 -->
-                <div class="bg-stone-900/40 border border-stone-800/80 rounded-2xl p-4 flex flex-col justify-between hover:border-angkringan-accent/50 transition-all group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-amber-950/40 border border-angkringan-warm rounded-xl flex items-center justify-center text-xl group-hover:scale-105 transition-transform duration-300">
-                            🐮
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-white group-hover:text-angkringan-accent transition-colors text-sm">Kuku Bima Susu</h4>
-                            <span class="font-black text-angkringan-accent text-sm">Rp6.000</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col gap-2 mt-3 pt-2.5 border-t border-stone-800/60">
-                        <div class="flex items-center justify-between">
-                            <span class="text-xs text-stone-500">Jumlah:</span>
-                            <div class="flex items-center gap-2">
-                                <button onclick="changeQty('kuku-bima-susu', -1)" class="w-7 h-7 rounded-lg bg-stone-800 hover:bg-stone-700 flex items-center justify-center text-xs font-bold">-</button>
-                                <span id="qty-kuku-bima-susu" class="w-5 text-center text-xs font-bold">0</span>
-                                <button onclick="changeQty('kuku-bima-susu', 1)" class="w-7 h-7 rounded-lg bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 flex items-center justify-center text-xs font-bold">+</button>
-                            </div>
-                        </div>
-                        <button onclick="orderSingleItemDirectly('kuku-bima-susu')" class="w-full bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/20 py-1.5 rounded-lg text-[10px] font-bold transition-all flex items-center justify-center gap-1.5">
-                            <i class="fa-brands fa-whatsapp"></i> Pesan Langsung
-                        </button>
+                    <div class="text-[10px] text-stone-500 text-center mt-3 pt-3 border-t border-stone-800/60">
+                        *Review disimpan sacara lokal ing browsermu. Matur nuwun wis mampir!
                     </div>
                 </div>
             </div>
@@ -582,7 +338,7 @@
                     <ul class="space-y-4 text-sm text-stone-300 leading-relaxed">
                         <li class="flex gap-3 items-start">
                             <span class="text-angkringan-accent mt-1 text-xs"><i class="fa-solid fa-circle-info"></i></span>
-                            <span><strong>Warung terlihat tutup bukan berarti tidak melayani.</strong></span>
+                            <span><strong>Warung terlihat tutup bukan berarti tidak melayani.</strong> Selama mas-masnya masih melek, pesanan tetap diproses.</span>
                         </li>
                         <li class="flex gap-3 items-start">
                             <span class="text-angkringan-accent mt-1 text-xs"><i class="fa-solid fa-circle-info"></i></span>
@@ -604,10 +360,10 @@
 
     </main>
 
-    <!-- Shopping Cart Modal (Hidden by Default) -->
+    <!-- Shopping Cart Modal Panel -->
     <div id="cart-modal" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
         <!-- Backdrop -->
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onclick="toggleCartModal()"></div>
+        <div class="absolute inset-0 bg-black/85 backdrop-blur-sm transition-opacity" onclick="toggleCartModal()"></div>
 
         <!-- Slide Panel -->
         <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
@@ -617,30 +373,33 @@
                     <h2 class="text-lg font-bold text-white flex items-center gap-2">
                         <i class="fa-solid fa-basket-shopping text-angkringan-accent"></i> Pesanan Kamu
                     </h2>
-                    <button onclick="toggleCartModal()" class="text-stone-400 hover:text-white p-2 rounded-lg bg-stone-800 hover:bg-stone-700 transition">
-                        <i class="fa-solid fa-times"></i>
-                    </button>
+                    <div class="flex items-center gap-2">
+                        <!-- Quick Clear Button -->
+                        <button onclick="clearCart()" class="text-xs text-red-400 hover:text-red-500 bg-red-500/10 hover:bg-red-500/20 px-2.5 py-1.5 rounded-lg transition" title="Kosongkan Keranjang">
+                            <i class="fa-solid fa-trash-can mr-1"></i> Resik
+                        </button>
+                        <button onclick="toggleCartModal()" class="text-stone-400 hover:text-white p-2 rounded-lg bg-stone-800 hover:bg-stone-700 transition">
+                            <i class="fa-solid fa-times"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Cart List Container (Scrollable) -->
                 <div class="flex-1 overflow-y-auto p-6 space-y-4" id="cart-items-container">
-                    <div class="text-center py-12 text-stone-500">
-                        <span class="text-5xl block mb-3">🛒</span>
-                        <p class="text-sm">Keranjang kosong. Pilih menu nikmat dulu yuk!</p>
-                    </div>
+                    <!-- Dynamic rendering of items -->
                 </div>
 
                 <!-- Checkout Form, Live WA Text Preview, & Summary -->
-                <div class="px-6 py-5 bg-stone-900 border-t border-angkringan-warm space-y-4 max-h-[60vh] overflow-y-auto">
+                <div class="px-6 py-5 bg-stone-900 border-t border-angkringan-warm space-y-4 max-h-[50vh] overflow-y-auto">
                     <!-- Delivery Name Field -->
                     <div>
-                        <label for="order-name" class="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-1.5">Nama Pemesan</label>
+                        <label for="order-name" class="block text-[10px] font-bold text-stone-400 uppercase tracking-wider mb-1">Nama Pemesan *</label>
                         <input type="text" id="order-name" oninput="updateLiveWAPreview()" placeholder="Masukkan nama Anda..." class="w-full bg-angkringan-dark border border-stone-800 focus:border-angkringan-accent rounded-xl px-4 py-2.5 text-sm text-stone-100 placeholder-stone-600 focus:outline-none transition-all">
                     </div>
 
                     <!-- Order Option (Dine In / Takeaway / Delivery) -->
                     <div>
-                        <label for="order-option" class="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-1.5">Metode Pengambilan</label>
+                        <label for="order-option" class="block text-[10px] font-bold text-stone-400 uppercase tracking-wider mb-1">Metode Pengambilan</label>
                         <select id="order-option" onchange="handleOrderOptionChange()" class="w-full bg-angkringan-dark border border-stone-800 focus:border-angkringan-accent rounded-xl px-4 py-2.5 text-sm text-stone-100 focus:outline-none transition-all">
                             <option value="dine-in">🍜 Makan di Sini (Dine-In)</option>
                             <option value="takeaway">🛍️ Bungkus (Take Away)</option>
@@ -650,31 +409,84 @@
 
                     <!-- Dynamic Details Field (Address, Table Number, etc.) -->
                     <div>
-                        <label id="label-order-detail" for="order-detail" class="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-1.5">Nomor Meja</label>
+                        <label id="label-order-detail" for="order-detail" class="block text-[10px] font-bold text-stone-400 uppercase tracking-wider mb-1">Nomor Meja</label>
                         <textarea id="order-detail" oninput="updateLiveWAPreview()" rows="2" placeholder="Contoh: Meja 3 / Lesehan Pojok Belakang..." class="w-full bg-angkringan-dark border border-stone-800 focus:border-angkringan-accent rounded-xl px-4 py-2 text-sm text-stone-100 placeholder-stone-600 focus:outline-none transition-all resize-none"></textarea>
                     </div>
 
                     <!-- Custom Notes Field -->
                     <div>
-                        <label for="order-notes" class="block text-xs font-bold text-stone-400 uppercase tracking-wider mb-1.5">Catatan Tambahan (Opsional)</label>
-                        <input type="text" id="order-notes" oninput="updateLiveWAPreview()" placeholder="Contoh: Mie rebus pedas gila, teh manis hangat..." class="w-full bg-angkringan-dark border border-stone-800 focus:border-angkringan-accent rounded-xl px-4 py-2.5 text-sm text-stone-100 placeholder-stone-600 focus:outline-none transition-all">
+                        <label for="order-notes" class="block text-[10px] font-bold text-stone-400 uppercase tracking-wider mb-1">Catatan Tambahan (Pedas/Hangat/Es)</label>
+                        <input type="text" id="order-notes" oninput="updateLiveWAPreview()" placeholder="Contoh: Mie rebus pedas gila, teh manis tawar..." class="w-full bg-angkringan-dark border border-stone-800 focus:border-angkringan-accent rounded-xl px-4 py-2.5 text-sm text-stone-100 placeholder-stone-600 focus:outline-none transition-all">
+                    </div>
+
+                    <!-- NEW METODE PEMBAYARAN SELECTION (Custom Premium Buttons) -->
+                    <div>
+                        <label class="block text-[10px] font-bold text-stone-400 uppercase tracking-wider mb-2">Metode Pembayaran</label>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <button type="button" onclick="selectPaymentMethod('cash')" id="pay-btn-cash" class="pay-method-btn bg-angkringan-accent text-angkringan-dark p-3 rounded-xl border border-angkringan-accent font-bold flex flex-col items-center gap-1 transition-all">
+                                <span class="text-lg">💵</span>
+                                <span>Bayar Tunai</span>
+                            </button>
+                            <button type="button" onclick="selectPaymentMethod('qris')" id="pay-btn-qris" class="pay-method-btn bg-stone-800/80 hover:bg-stone-800 text-stone-300 p-3 rounded-xl border border-stone-800 font-bold flex flex-col items-center gap-1 transition-all">
+                                <span class="text-lg">📱</span>
+                                <span>Scan QRIS</span>
+                            </button>
+                            <button type="button" onclick="selectPaymentMethod('gopay')" id="pay-btn-gopay" class="pay-method-btn bg-stone-800/80 hover:bg-stone-800 text-stone-300 p-3 rounded-xl border border-stone-800 font-bold flex flex-col items-center gap-1 transition-all">
+                                <span class="text-lg text-emerald-400">🟢</span>
+                                <span>GoPay</span>
+                            </button>
+                            <button type="button" onclick="selectPaymentMethod('dana')" id="pay-btn-dana" class="pay-method-btn bg-stone-800/80 hover:bg-stone-800 text-stone-300 p-3 rounded-xl border border-stone-800 font-bold flex flex-col items-center gap-1 transition-all">
+                                <span class="text-lg text-blue-400">🔵</span>
+                                <span>DANA</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- DYNAMIC PAYMENT METHOD DETAILS DISPLAY -->
+                    <div id="payment-details-box" class="bg-angkringan-dark/90 border border-stone-800 rounded-xl p-4 space-y-3 hidden">
+                        <!-- QRIS Detail Frame -->
+                        <div id="pay-detail-qris" class="hidden text-center space-y-2">
+                            <p class="text-[10px] text-stone-400 font-bold uppercase tracking-wider">Silakan Scan Kode QRIS:</p>
+                            <div class="relative inline-block bg-white p-2.5 rounded-2xl shadow-xl">
+                                <img src="https://b.top4top.io/p_3847fw7g31.jpeg" class="w-40 h-40 object-contain mx-auto rounded-lg" alt="QRIS Angkringan" onerror="this.src='https://placehold.co/200x200/faf7f2/3b2214?text=QRIS+ANGKRINGAN'">
+                            </div>
+                            <div>
+                                <button type="button" onclick="toggleQrisZoom(true)" class="bg-angkringan-accent/10 hover:bg-angkringan-accent/20 border border-angkringan-accent/40 text-angkringan-accent font-bold text-[10px] px-3 py-1.5 rounded-xl transition inline-flex items-center gap-1">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i> Perbesar Gambar QRIS
+                                </button>
+                            </div>
+                            <p class="text-[9px] text-stone-500 italic">Screenshoto banjur scan nggo E-Wallet mu!</p>
+                        </div>
+
+                        <!-- GoPay / DANA Detail Frame -->
+                        <div id="pay-detail-number" class="hidden text-center space-y-2.5">
+                            <p id="pay-number-provider" class="text-[10px] text-stone-400 font-bold uppercase tracking-wider">Transfer GoPay:</p>
+                            <div class="bg-stone-950 p-3 rounded-xl flex items-center justify-between border border-stone-800">
+                                <span class="font-mono text-white font-extrabold text-sm tracking-widest">081952545612</span>
+                                <button type="button" onclick="copyToClipboard('081952545612')" class="bg-angkringan-accent/20 hover:bg-angkringan-accent/40 text-angkringan-accent text-[10px] font-black px-2.5 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+                                    <i class="fa-regular fa-copy"></i> Salin No
+                                </button>
+                            </div>
+                            <p class="text-[9px] text-stone-500 italic">Atas Nama: Angkringan G-Coffe</p>
+                        </div>
                     </div>
 
                     <!-- LIVE WHATSAPP MESSAGE PREVIEW BOX -->
                     <div class="mt-4 bg-angkringan-dark/80 p-4 border border-stone-800 rounded-xl">
-                        <div class="flex items-center gap-2 mb-2 text-green-500 font-bold text-xs uppercase tracking-wide">
+                        <div class="flex items-center gap-2 mb-2 text-green-500 font-bold text-[10px] uppercase tracking-wide">
                             <i class="fa-brands fa-whatsapp text-sm"></i> Pratinjau Teks WhatsApp:
                         </div>
-                        <pre id="whatsapp-live-preview" class="text-[11px] text-stone-300 font-mono whitespace-pre-wrap leading-tight bg-stone-950 p-3 rounded-lg overflow-x-auto max-h-36">Format teks otomatis akan tampil di sini saat Anda memilih menu...</pre>
+                        <pre id="whatsapp-live-preview" class="text-[10px] text-stone-300 font-mono whitespace-pre-wrap leading-tight bg-stone-950 p-3 rounded-lg overflow-x-auto max-h-32">Format teks otomatis akan tampil di sini saat Anda memilih menu...</pre>
                     </div>
 
+                    <!-- Price summary table -->
                     <div class="space-y-2 pt-2">
                         <div class="flex justify-between text-xs text-stone-400">
                             <span>Estimasi Subtotal</span>
                             <span id="cart-subtotal">Rp0</span>
                         </div>
                         <div class="flex justify-between text-xs text-stone-400">
-                            <span>Ongkir / Biaya Kirim</span>
+                            <span>Biaya Layanan / Kirim</span>
                             <span id="delivery-info-status" class="text-stone-400 font-medium">Sesuai Metode</span>
                         </div>
                         <div class="flex justify-between text-sm font-bold text-white pt-2 border-t border-stone-800">
@@ -692,11 +504,28 @@
         </div>
     </div>
 
+    <!-- QRIS Immersive Zoom Modal -->
+    <div id="qris-zoom-modal" class="fixed inset-0 z-50 overflow-hidden hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="toggleQrisZoom(false)"></div>
+        <div class="relative max-w-sm w-full bg-stone-900 border border-angkringan-warm/60 p-6 rounded-3xl text-center shadow-2xl z-10 transform scale-95 transition-all duration-300">
+            <button onclick="toggleQrisZoom(false)" class="absolute top-4 right-4 text-stone-400 hover:text-white bg-stone-800/80 p-2.5 rounded-xl transition">
+                <i class="fa-solid fa-times"></i>
+            </button>
+            <h3 class="font-serif italic text-xl text-angkringan-accent font-extrabold mb-4">Scan QRIS Angkringan</h3>
+            <div class="bg-white p-3 rounded-2xl shadow-inner inline-block mx-auto">
+                <img src="https://b.top4top.io/p_3847fw7g31.jpeg" class="w-64 h-64 object-contain mx-auto rounded-lg" alt="QRIS Angkringan Zoomed" onerror="this.src='https://placehold.co/300x300/faf7f2/3b2214?text=QRIS+ANGKRINGAN'">
+            </div>
+            <p class="text-[11px] text-stone-400 mt-4 leading-relaxed">
+                Screenshoto barcode ing dhuwur banjur bayar nganggo aplikasi E-Wallet (GoPay, DANA, OVO, ShopeePay, LinkAja) utawa Mobile Banking mu!
+            </p>
+        </div>
+    </div>
+
     <!-- Floating Bottom Bar (Appears when there are items in the cart) -->
-    <div id="floating-order-bar" class="fixed bottom-0 left-0 right-0 p-4 bg-angkringan-dark/90 backdrop-blur-md border-t border-angkringan-accent/30 shadow-2xl z-40 transform translate-y-full transition-transform duration-300">
+    <div id="floating-order-bar" class="fixed bottom-0 left-0 right-0 p-4 bg-angkringan-dark/95 backdrop-blur-md border-t border-angkringan-accent/30 shadow-2xl z-30 transform translate-y-full transition-transform duration-300">
         <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
             <div>
-                <p class="text-xs text-stone-400"><span id="floating-item-count">0</span> Item Terpilih</p>
+                <p class="text-[10px] text-stone-400"><span id="floating-item-count">0</span> Item Terpilih</p>
                 <p id="floating-total-price" class="text-lg font-black text-angkringan-accent">Rp0</p>
             </div>
             <div class="flex gap-2">
@@ -717,7 +546,7 @@
     </div>
 
     <!-- Footer Section with TASMEN Developer Credit -->
-    <footer class="bg-stone-950 border-t border-stone-900 py-12 px-4 mt-20 text-center">
+    <footer class="bg-stone-950 border-t border-stone-900/60 py-12 px-4 mt-20 text-center">
         <div class="max-w-4xl mx-auto space-y-6">
             <h3 class="font-serif italic text-xl text-angkringan-accent">"Buka Tutup Sak Geleme, Sing Penting Isih Gelem Nglayani."</h3>
             
@@ -759,40 +588,347 @@
     </footer>
 
     <script>
-        // Database menu & details
+        // Database menu - Vastly expanded with highly localized iconic Angkringan options!
         const menuDB = {
-            // Makanan
-            'mie-rebus': { name: 'Mie Rebus', price: 5000, category: 'makanan' },
-            'mie-rebus-telur': { name: 'Mie Rebus + Telur', price: 8000, category: 'makanan' },
-            'mie-rebus-telur-nasi': { name: 'Mie Rebus + Telur + Nasi', price: 12000, category: 'makanan' },
-            'mie-goreng': { name: 'Mie Goreng', price: 5000, category: 'makanan' },
-            'mie-goreng-telur': { name: 'Mie Goreng + Telur', price: 8000, category: 'makanan' },
-            'mie-goreng-telur-nasi': { name: 'Mie Goreng + Telur + Nasi', price: 12000, category: 'makanan' },
+            // Sego Kucing (Iconic Rice packages)
+            'sego-teri': { name: 'Sego Kucing Sambal Teri', price: 3000, category: 'sego', emoji: '🍛', desc: 'Nasi kucing gurih porsi pas dikihi sambal teri lombok abang khas Jogja.' },
+            'sego-tempe': { name: 'Sego Kucing Orek Tempe', price: 3000, category: 'sego', emoji: '🍛', desc: 'Nasi kucing klasik lauk kering orek tempe manis gurih.' },
+            'sego-mercon': { name: 'Sego Kucing Mercon Pedas', price: 3500, category: 'sego', emoji: '🔥', desc: 'Nasi hangat dengan suwiran daging pedas hott mantap!' },
             
-            // Minuman
-            'teh-anget': { name: 'Teh Anget', price: 4000, category: 'minuman' },
-            'es-teh': { name: 'Es Teh', price: 4000, category: 'minuman' },
-            'wedang-jeruk': { name: 'Wedang Jeruk', price: 4000, category: 'minuman' },
-            'es-jeruk': { name: 'Es Jeruk', price: 4000, category: 'minuman' },
-            'es-extra-joss': { name: 'Es Extra Joss', price: 4000, category: 'minuman' },
-            'es-jossu': { name: 'Es Jossu', price: 6000, category: 'minuman' },
-            'es-kuku-bima': { name: 'Es Kuku Bima', price: 4000, category: 'minuman' },
-            'kuku-bima-susu': { name: 'Kuku Bima Susu', price: 6000, category: 'minuman' }
+            // Sate-Satean (Skewers)
+            'sate-usus': { name: 'Sate Usus Ayam Kecap', price: 2000, category: 'sate', emoji: '🍢', desc: 'Sate usus bumbu marinasi kecap legi, siap dibakar anget.' },
+            'sate-puyuh': { name: 'Sate Telur Puyuh', price: 3500, category: 'sate', emoji: '🍢', desc: 'Sate telur puyuh gurih bumbu bacem coklat legi meresap.' },
+            'sate-kikil': { name: 'Sate Kikil Pedas', price: 2500, category: 'sate', emoji: '🍢', desc: 'Sate kikil kenyal-kenyal pedas manis gurih.' },
+            
+            // Makanan / Gorengan / Noodles
+            'mendoan': { name: 'Gorengan Tempe Mendoan', price: 1500, category: 'makanan', emoji: '🥞', desc: 'Tempe mendoan ambyar lebar anget-anget dicocol lombok.' },
+            'tahu-isi': { name: 'Tahu Isi Sayur', price: 1500, category: 'makanan', emoji: '🥟', desc: 'Tahu isi sayur wortel kubis kriuk gurih.' },
+            'mie-rebus': { name: 'Mie Rebus Polos', price: 5000, category: 'makanan', emoji: '🍜', desc: 'Mie rebus hangat racikan spesial ditambah bawang goreng harum.' },
+            'mie-rebus-telur': { name: 'Mie Rebus + Telur', price: 8000, category: 'makanan', emoji: '🍳', desc: 'Mie rebus hangat ditambah telur rebus setengah matang makin mantap.' },
+            'mie-rebus-telur-nasi': { name: 'Mie Rebus + Telur + Nasi', price: 12000, category: 'makanan', emoji: '🍚', desc: 'Sajian komplit juara lapar: mie rebus, telur, plus nasi pulen hangat.' },
+            'mie-goreng': { name: 'Mie Goreng Polos', price: 5000, category: 'makanan', emoji: '🥢', desc: 'Mie goreng gurih disajikan dengan taburan bawang goreng dan rawit.' },
+            'mie-goreng-telur': { name: 'Mie Goreng + Telur', price: 8000, category: 'makanan', emoji: '🍝', desc: 'Mie goreng makin spesial dikombinasikan dengan ceplok atau dadar.' },
+            'mie-goreng-telur-nasi': { name: 'Mie Goreng + Telur + Nasi', price: 12000, category: 'makanan', emoji: '🍱', desc: 'Double kenyang mantap: porsi mie goreng lengkap dengan telur dan nasi.' },
+            
+            // Wedangan / Minuman (Iconic Drinks)
+            'kopi-joss': { name: 'Kopi Joss (Arang Areng)', price: 5000, category: 'minuman', emoji: '☕', desc: 'Kopi hitam mantap dicemplungi arang membara khas Tugu Jogja!' },
+            'teh-anget': { name: 'Teh Anget Syahdu', price: 4000, category: 'minuman', emoji: '🍵', desc: 'Teh manis hangat dengan seduhan pekat kental wangi melati.' },
+            'es-teh': { name: 'Es Teh Segar', price: 4000, category: 'minuman', emoji: '🍹', desc: 'Kesegaran es teh legi legendaris pelipur lara.' },
+            'wedang-jahe': { name: 'Wedang Jahe Geprek', price: 5000, category: 'minuman', emoji: '🔥', desc: 'Air jahe asli geprek bakar berkhasiat menghangatkan raga.' },
+            'wedang-jeruk': { name: 'Wedang Jeruk Hangat', price: 4000, category: 'minuman', emoji: '🍊', desc: 'Perasan jeruk asli murni manis hangat segar.' },
+            'es-jeruk': { name: 'Es Jeruk Asli', price: 4000, category: 'minuman', emoji: '🥤', desc: 'Es jeruk dingin manis menggoda pas panas-panas.' },
+            'es-extra-joss': { name: 'Es Extra Joss', price: 4000, category: 'minuman', emoji: '⚡', desc: 'Minuman energi joss dingin penambah stamina lari malam.' },
+            'es-jossu': { name: 'Es Jossu (Susu)', price: 6000, category: 'minuman', emoji: '🥛', desc: 'Extra joss dikombinasikan susu kental manis legi pol.' },
+            'es-kuku-bima': { name: 'Es Kuku Bima', price: 4000, category: 'minuman', emoji: '🔋', desc: 'Es Kuku Bima anggur dingin segar bertenaga.' },
+            'kuku-bima-susu': { name: 'Kuku Bima Susu', price: 6000, category: 'minuman', emoji: '🍼', desc: 'Kuku Bima anggur dicampur susu kental manis creamy segar.' }
         };
 
-        // User Cart State
-        let cart = {};
+        // Pure Web Audio Synthesizer to create warm retro sound effects without files
+        let audioCtx = null;
+        let isAudioMuted = true; // Started muted by default to obey browser policies
 
-        // Helper to format currency
-        function formatRupiah(amount) {
-            return new Intl.NumberFormat('id-ID', {
-                style: 'currency',
-                currency: 'IDR',
-                maximumFractionDigits: 0
-            }).format(amount);
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
         }
 
-        // Change Quantity Triggered from Menu Item
+        // Warm cozy pop tone (wedang/retro game feel)
+        function synthPop(freq = 523.25, type = 'sine', duration = 0.15) {
+            if (isAudioMuted) return;
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                // Frequency slide for a bubbly feel
+                osc.frequency.exponentialRampToValueAtTime(freq * 1.5, audioCtx.currentTime + duration);
+                
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {
+                console.log("Audio not supported yet:", e);
+            }
+        }
+
+        // Chime for successes or completions
+        function synthChime() {
+            if (isAudioMuted) return;
+            synthPop(523.25, 'triangle', 0.1);
+            setTimeout(() => {
+                synthPop(659.25, 'sine', 0.15);
+            }, 80);
+            setTimeout(() => {
+                synthPop(783.99, 'sine', 0.25);
+            }, 160);
+        }
+
+        // Toggle Audio Setting
+        function toggleAudio() {
+            isAudioMuted = !isAudioMuted;
+            const btn = document.getElementById('sound-btn');
+            if (isAudioMuted) {
+                btn.innerHTML = `<i class="fa-solid fa-volume-xmark text-red-500"></i>`;
+                showToast("Efek suara dimatikan", "fa-volume-xmark");
+            } else {
+                btn.innerHTML = `<i class="fa-solid fa-volume-high text-green-500"></i>`;
+                initAudio();
+                synthChime();
+                showToast("Efek suara diaktifkan! ☕", "fa-volume-high");
+            }
+        }
+
+        // Cart and search state
+        let cart = {};
+        let activeCategoryFilter = 'all';
+        let searchQuery = '';
+        let activePaymentMethod = 'cash'; // Default payment is Cash
+
+        // Dynamic funny warung status text list
+        const statusPhrases = [
+            "BUKA (mergo mas'e isih tangi)",
+            "BUKA (kompor joss areng murup terus!)",
+            "TUTUP SEGELAP MALAM (penjaga lagi nggemati pacare)",
+            "SETENGAH BUKA (mas'e lagi tuku rokok)",
+            "BUKA (delivery meluncur Yogyakarta-Sleman)",
+            "TUTUP SEMENTARA (mergo nonton dangdut campursari)"
+        ];
+        let currentStatusIndex = 0;
+
+        function toggleFunnies() {
+            currentStatusIndex = (currentStatusIndex + 1) % statusPhrases.length;
+            const statusEl = document.getElementById('live-status-text');
+            statusEl.innerText = statusPhrases[currentStatusIndex];
+            
+            // Adjust glowing style depending on state
+            if (statusPhrases[currentStatusIndex].includes("TUTUP")) {
+                statusEl.className = "text-red-500 font-bold animate-pulse";
+                synthPop(220, 'sawtooth', 0.3);
+                showToast("Status: Wah, ketoke warung libur sek!", "fa-circle-xclamation");
+            } else {
+                statusEl.className = "text-green-400 font-bold";
+                synthChime();
+                showToast("Status: Ayoo ngangkring mas!", "fa-utensils");
+            }
+        }
+
+        // Handle Active Payment Method state and details panels visibility
+        function selectPaymentMethod(method) {
+            activePaymentMethod = method;
+            synthPop(587.33, 'triangle', 0.12); // Chime tone change
+
+            // Update custom buttons styling classes
+            document.querySelectorAll('.pay-method-btn').forEach(btn => {
+                btn.className = "pay-method-btn bg-stone-800/80 hover:bg-stone-800 text-stone-300 p-3 rounded-xl border border-stone-800 font-bold flex flex-col items-center gap-1 transition-all";
+            });
+
+            const activeBtn = document.getElementById(`pay-btn-${method}`);
+            if (activeBtn) {
+                activeBtn.className = "pay-method-btn bg-angkringan-accent text-angkringan-dark p-3 rounded-xl border border-angkringan-accent font-bold flex flex-col items-center gap-1 transition-all";
+            }
+
+            const detailsBox = document.getElementById('payment-details-box');
+            const qrisPanel = document.getElementById('pay-detail-qris');
+            const numberPanel = document.getElementById('pay-detail-number');
+            const providerText = document.getElementById('pay-number-provider');
+
+            // Hide/Show correct payment sub-elements
+            if (method === 'cash') {
+                detailsBox.classList.add('hidden');
+                showToast("Metode Pembayaran: Tunai (Bayar neng nggon) 💵", "fa-wallet");
+            } else {
+                detailsBox.classList.remove('hidden');
+                if (method === 'qris') {
+                    qrisPanel.classList.remove('hidden');
+                    numberPanel.classList.add('hidden');
+                    showToast("Metode Pembayaran: Scan QRIS 📱", "fa-qrcode");
+                } else {
+                    qrisPanel.classList.add('hidden');
+                    numberPanel.classList.remove('hidden');
+                    if (method === 'gopay') {
+                        providerText.innerText = 'Transfer GoPay:';
+                        showToast("Metode Pembayaran: GoPay 🟢", "fa-wallet");
+                    } else if (method === 'dana') {
+                        providerText.innerText = 'Transfer DANA:';
+                        showToast("Metode Pembayaran: DANA 🔵", "fa-wallet");
+                    }
+                }
+            }
+
+            updateLiveWAPreview();
+        }
+
+        // Zoom/Fullscreen QRIS Modal handler
+        function toggleQrisZoom(show) {
+            synthPop(show ? 659.25 : 392, 'sine', 0.15);
+            const zoomModal = document.getElementById('qris-zoom-modal');
+            if (show) {
+                zoomModal.classList.remove('hidden');
+                setTimeout(() => {
+                    zoomModal.firstElementChild.nextElementSibling.classList.remove('scale-95');
+                    zoomModal.firstElementChild.nextElementSibling.classList.add('scale-100');
+                }, 50);
+            } else {
+                zoomModal.firstElementChild.nextElementSibling.classList.remove('scale-100');
+                zoomModal.firstElementChild.nextElementSibling.classList.add('scale-95');
+                setTimeout(() => {
+                    zoomModal.classList.add('hidden');
+                }, 200);
+            }
+        }
+
+        // Copy Account/Phone Number Utility (Bypasses iframe security rules gracefully)
+        function copyToClipboard(text) {
+            const tempInput = document.createElement("textarea");
+            tempInput.value = text;
+            // Prevent scrolling on focus / hidden attributes
+            tempInput.style.top = "0";
+            tempInput.style.left = "0";
+            tempInput.style.position = "fixed";
+            document.body.appendChild(tempInput);
+            tempInput.focus();
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); // Mobile compatibility
+            
+            let success = false;
+            try {
+                success = document.execCommand('copy');
+            } catch (err) {
+                console.error("Gagal menyalin text: ", err);
+            }
+            document.body.removeChild(tempInput);
+
+            if (success) {
+                synthChime();
+                showToast("Nomor HP berhasil disalin! 📋", "fa-copy");
+            } else {
+                showToast("Gagal menyalin otomatis, silakan salin manual.", "fa-circle-xclamation");
+            }
+        }
+
+        // Menu item dynamic generation based on database, search queries & category tags
+        function buildMenuCards() {
+            const container = document.getElementById('menu-grid-container');
+            container.innerHTML = ''; // Clear container
+
+            let matchingItems = 0;
+
+            for (const [id, item] of Object.entries(menuDB)) {
+                // Category match check
+                const matchCategory = (activeCategoryFilter === 'all') || (item.category === activeCategoryFilter);
+                
+                // Query search match check
+                const matchQuery = item.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                   item.desc.toLowerCase().includes(searchQuery.toLowerCase());
+
+                if (matchCategory && matchQuery) {
+                    matchingItems++;
+                    const inCartQty = cart[id] || 0;
+
+                    const card = document.createElement('div');
+                    card.className = "bg-angkringan-card border border-stone-800 hover:border-angkringan-accent/50 rounded-3xl p-4 flex flex-col justify-between hover:shadow-xl transition-all duration-300 group wood-glow transform hover:-translate-y-1";
+                    card.innerHTML = `
+                        <div class="flex gap-4">
+                            <!-- Menu Emoji / Graphic avatar -->
+                            <div class="w-16 h-16 bg-stone-900 border border-angkringan-warm/60 rounded-2xl flex items-center justify-center text-3xl shrink-0 group-hover:scale-105 transition-transform duration-300 relative select-none">
+                                ${item.emoji}
+                                ${inCartQty > 0 ? `<span class="absolute -top-1.5 -right-1.5 bg-angkringan-accent text-angkringan-dark font-black text-[10px] w-5 h-5 rounded-full flex items-center justify-center border border-angkringan-dark">${inCartQty}</span>` : ''}
+                            </div>
+                            <!-- Core food info -->
+                            <div class="flex-1">
+                                <h4 class="font-extrabold text-white text-sm group-hover:text-angkringan-accent transition-colors">${item.name}</h4>
+                                <p class="text-[11px] text-stone-400 mt-1 leading-snug">${item.desc}</p>
+                                <span class="inline-block mt-2 font-black text-angkringan-accent text-sm">${formatRupiah(item.price)}</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Control Action footer of card -->
+                        <div class="flex flex-col gap-2 mt-4 pt-3 border-t border-stone-800/60">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] text-stone-500 font-medium">Atur Porsi:</span>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="changeQty('${id}', -1)" class="w-8 h-8 rounded-xl bg-stone-800 hover:bg-stone-700 active:scale-90 flex items-center justify-center text-stone-300 transition-all font-bold text-sm">-</button>
+                                    <span id="qty-${id}" class="w-6 text-center font-bold text-xs text-white">${inCartQty}</span>
+                                    <button onclick="changeQty('${id}', 1)" class="w-8 h-8 rounded-xl bg-angkringan-accent text-angkringan-dark hover:bg-angkringan-accent/80 active:scale-90 flex items-center justify-center font-bold text-sm transition-all">+</button>
+                                </div>
+                            </div>
+                            <button onclick="orderSingleItemDirectly('${id}')" class="w-full mt-1.5 bg-green-600/10 hover:bg-green-600 text-green-400 hover:text-white border border-green-600/20 py-2 rounded-xl text-[10px] font-bold transition-all flex items-center justify-center gap-1.5">
+                                <i class="fa-brands fa-whatsapp text-xs"></i> Pesan Langsung (Mager)
+                            </button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                }
+            }
+
+            if (matchingItems === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-stone-500">
+                        <span class="text-5xl block mb-3">🍛</span>
+                        <p class="text-sm font-semibold">Waduh, menu sing sampeyan golek'i ora ono mas/mbak.</p>
+                        <button onclick="resetFilters()" class="mt-3 text-xs bg-angkringan-warm px-3 py-1.5 rounded-xl text-stone-300 hover:text-white transition">Delok Kabeh Menu</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Filter categories instantly
+        function filterCategory(cat) {
+            synthPop(293.66, 'sine', 0.1);
+            activeCategoryFilter = cat;
+            
+            // Manage UI tabs state classes
+            document.querySelectorAll('.filter-tab').forEach(btn => {
+                btn.className = "filter-tab bg-angkringan-warm/50 text-stone-300 hover:bg-angkringan-warm px-4 py-2 rounded-full font-bold text-xs transition duration-200";
+            });
+
+            const activeTab = document.getElementById(`tab-${cat}`);
+            if (activeTab) {
+                activeTab.className = "filter-tab active-tab bg-angkringan-accent text-angkringan-dark px-4 py-2 rounded-full font-bold text-xs transition duration-200";
+            }
+
+            // Adjust headers depending on selected category
+            const titles = {
+                'all': 'Semua Menu',
+                'sego': 'Sego Kucing Klasik',
+                'sate': 'Sate Baceman & Bakar',
+                'makanan': 'Mie & Gorengan Anget',
+                'minuman': 'Wedangan Segar & Anget'
+            };
+            const emojis = {
+                'all': '✨', 'sego': '🍛', 'sate': '🍢', 'makanan': '🍜', 'minuman': '🥤'
+            };
+
+            document.getElementById('section-title').innerText = titles[cat] || 'Menu';
+            document.getElementById('section-emoji').innerText = emojis[cat] || '✨';
+
+            buildMenuCards();
+        }
+
+        // Live input filters trigger
+        function filterMenuByQuery() {
+            searchQuery = document.getElementById('menu-search').value;
+            buildMenuCards();
+        }
+
+        function resetFilters() {
+            document.getElementById('menu-search').value = '';
+            searchQuery = '';
+            filterCategory('all');
+        }
+
+        // Quantity change inside logic
         function changeQty(itemId, val) {
             const currentQty = cart[itemId] || 0;
             const newQty = Math.max(0, currentQty + val);
@@ -803,22 +939,35 @@
                 cart[itemId] = newQty;
             }
 
-            // Update UI Counters
-            const qtyElement = document.getElementById(`qty-${itemId}`);
-            if (qtyElement) {
-                qtyElement.innerText = newQty;
+            // Quick display sync for individual grid items if rendered
+            const gridQty = document.getElementById(`qty-${itemId}`);
+            if (gridQty) {
+                gridQty.innerText = newQty;
             }
+
             updateCartSummary();
             
-            // Show dynamic Toast feedback
+            // Audio feed & feedback toast
             if (val > 0) {
-                showToast(`Ditambahkan: ${menuDB[itemId].name} ke keranjang!`, 'fa-plus-circle');
+                synthPop(523.25 + (newQty * 20), 'sine', 0.12);
+                showToast(`Ditambah: 1x ${menuDB[itemId].name}`, 'fa-plus-circle');
             } else if (val < 0 && currentQty > 0) {
-                showToast(`Kurangi: ${menuDB[itemId].name}`, 'fa-minus-circle');
+                synthPop(392, 'sine', 0.1);
+                showToast(`Dikurangi: ${menuDB[itemId].name}`, 'fa-minus-circle');
             }
         }
 
-        // Update Cart Badges, Floating Bottom Bar & Calculator UI
+        // Clear everything inside cart
+        function clearCart() {
+            if (Object.keys(cart).length === 0) return;
+            cart = {};
+            synthPop(180, 'sawtooth', 0.25);
+            updateCartSummary();
+            buildMenuCards();
+            showToast("Keranjang wis diresik'i!", "fa-trash-can");
+        }
+
+        // Sync and refresh overall badges & panels
         function updateCartSummary() {
             let totalItemsCount = 0;
             let totalPrice = 0;
@@ -828,7 +977,7 @@
                 totalPrice += qty * menuDB[id].price;
             }
 
-            // Badge Update
+            // Top Cart Count Badge
             const badge = document.getElementById('cart-count-badge');
             if (totalItemsCount > 0) {
                 badge.innerText = totalItemsCount;
@@ -837,7 +986,7 @@
                 badge.classList.add('hidden');
             }
 
-            // Floating Bottom Bar Update
+            // Floating bottom control overlay logic
             const floatingBar = document.getElementById('floating-order-bar');
             if (totalItemsCount > 0) {
                 document.getElementById('floating-item-count').innerText = totalItemsCount;
@@ -847,16 +996,15 @@
                 floatingBar.classList.add('translate-y-full');
             }
 
-            // Subtotal / Total Updates
+            // Subtotals inside modal checkout form
             document.getElementById('cart-subtotal').innerText = formatRupiah(totalPrice);
             document.getElementById('cart-total-price').innerText = formatRupiah(totalPrice);
 
-            // Re-render Cart Item List & Update Live Message Preview
             renderCartItems();
             updateLiveWAPreview();
         }
 
-        // Render Cart items list in slideout panel
+        // Render Cart items list inside slide panel modal
         function renderCartItems() {
             const container = document.getElementById('cart-items-container');
             const entries = Object.entries(cart);
@@ -865,33 +1013,39 @@
                 container.innerHTML = `
                     <div class="text-center py-12 text-stone-500">
                         <span class="text-5xl block mb-3">🛒</span>
-                        <p class="text-sm">Keranjang kosong. Pilih menu nikmat dulu yuk!</p>
+                        <p class="text-xs">Keranjang isih kosong melompong. Monggo dipilih rumiyin!</p>
                     </div>
                 `;
                 return;
             }
 
-            let html = '<div class="space-y-4">';
+            let html = '<div class="space-y-3.5">';
             entries.forEach(([id, qty]) => {
                 const item = menuDB[id];
                 const subTotal = qty * item.price;
-                const emoji = item.category === 'makanan' ? '🍜' : '🥤';
 
                 html += `
-                    <div class="flex items-center justify-between bg-stone-900 p-3.5 rounded-xl border border-stone-800">
-                        <div class="flex items-center gap-3">
-                            <span class="text-xl">${emoji}</span>
-                            <div>
-                                <h5 class="font-bold text-stone-200 text-sm leading-tight">${item.name}</h5>
-                                <p class="text-xs text-stone-500 mt-0.5">${formatRupiah(item.price)} x ${qty}</p>
+                    <div class="bg-stone-900 border border-stone-800 p-3.5 rounded-2xl flex flex-col gap-2">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2.5">
+                                <span class="text-lg">${item.emoji}</span>
+                                <div>
+                                    <h5 class="font-bold text-stone-200 text-xs">${item.name}</h5>
+                                    <span class="text-[10px] text-stone-500">${formatRupiah(item.price)}/porsi</span>
+                                </div>
                             </div>
+                            <span class="font-extrabold text-angkringan-accent text-xs">${formatRupiah(subTotal)}</span>
                         </div>
-                        <div class="flex items-center justify-between gap-3">
-                            <span class="font-black text-angkringan-accent text-sm mr-2">${formatRupiah(subTotal)}</span>
+                        
+                        <!-- Mini counter and item-specific note input inside cart! -->
+                        <div class="flex items-center justify-between pt-2 border-t border-stone-800/50">
+                            <!-- Small note input -->
+                            <input type="text" id="note-${id}" oninput="updateLiveWAPreview()" placeholder="Catetan (misal: pedes, anget)..." class="bg-angkringan-dark/60 text-[10px] border border-stone-800 focus:border-angkringan-accent rounded-lg px-2 py-1 text-stone-300 w-[55%] focus:outline-none">
+                            
                             <div class="flex items-center gap-1.5 bg-stone-950 p-1 rounded-lg">
-                                <button onclick="changeQty('${id}', -1)" class="w-6 h-6 rounded bg-stone-800 text-xs font-bold hover:bg-stone-700">-</button>
-                                <span class="w-4 text-center text-xs font-bold text-stone-300">${qty}</span>
-                                <button onclick="changeQty('${id}', 1)" class="w-6 h-6 rounded bg-angkringan-accent text-angkringan-dark text-xs font-bold hover:bg-angkringan-accent/80">+</button>
+                                <button onclick="changeQty('${id}', -1)" class="w-5 h-5 rounded bg-stone-800 text-[10px] font-bold hover:bg-stone-700 flex items-center justify-center">-</button>
+                                <span class="w-4 text-center text-[10px] font-bold text-stone-300">${qty}</span>
+                                <button onclick="changeQty('${id}', 1)" class="w-5 h-5 rounded bg-angkringan-accent text-angkringan-dark text-[10px] font-bold hover:bg-angkringan-accent/85 flex items-center justify-center">+</button>
                             </div>
                         </div>
                     </div>
@@ -901,71 +1055,85 @@
             container.innerHTML = html;
         }
 
-        // Handle Dine In / Takeaway / Delivery options change
+        // Handle delivery method changes inside checkout form UI
         function handleOrderOptionChange() {
             const option = document.getElementById('order-option').value;
             const label = document.getElementById('label-order-detail');
             const detailInput = document.getElementById('order-detail');
             const deliveryStatus = document.getElementById('delivery-info-status');
 
+            synthPop(329.63, 'sine', 0.1);
+
             if (option === 'dine-in') {
                 label.innerText = 'Nomor Meja';
-                detailInput.placeholder = 'Contoh: Meja 3 / Lesehan Pojok Belakang...';
+                detailInput.placeholder = 'Contoh: Meja Lesehan Pojok Kulon...';
                 detailInput.disabled = false;
                 deliveryStatus.innerText = 'Makan di Tempat';
-                deliveryStatus.className = "text-stone-400 font-medium";
+                deliveryStatus.className = "text-stone-400 font-medium text-xs";
             } else if (option === 'takeaway') {
-                label.innerText = 'Jam Pengambilan (Opsional)';
-                detailInput.placeholder = 'Contoh: Diambil jam 7 malam / 10 menit lagi...';
+                label.innerText = 'Estimasi Jam Dijupuk (Bungkus)';
+                detailInput.placeholder = 'Contoh: Diambil jam 8 bengi / 15 menit maneh...';
                 detailInput.disabled = false;
                 deliveryStatus.innerText = 'Ambil Sendiri';
-                deliveryStatus.className = "text-wood-500 font-medium text-yellow-500";
+                deliveryStatus.className = "text-yellow-500 font-medium text-xs";
             } else if (option === 'delivery') {
                 label.innerText = 'Alamat Lengkap Pengantaran';
-                detailInput.placeholder = 'Tulis alamat lengkap pengantaran Anda...';
+                detailInput.placeholder = 'Tulis alamat lengkap pengantaran (mager delivery)...';
                 detailInput.disabled = false;
-                deliveryStatus.innerText = 'Hubungi di WA';
-                deliveryStatus.className = "text-green-500 font-medium";
+                deliveryStatus.innerText = 'Kirim Delivery';
+                deliveryStatus.className = "text-green-500 font-medium text-xs";
             }
 
             updateLiveWAPreview();
         }
 
-        // Build formatted WhatsApp Message text dynamically based on inputs
+        // Build formulated message templates
         function buildWhatsAppMessage() {
             const entries = Object.entries(cart);
             if (entries.length === 0) return "";
 
-            const name = document.getElementById('order-name').value.trim() || "Belum diisi";
+            const name = document.getElementById('order-name').value.trim() || "Mager Mania";
             const option = document.getElementById('order-option').value;
-            const detail = document.getElementById('order-detail').value.trim() || "Belum diisi";
-            const notes = document.getElementById('order-notes').value.trim() || "Tidak ada";
+            const detail = document.getElementById('order-detail').value.trim() || "Meja Pojokan";
+            const globalNotes = document.getElementById('order-notes').value.trim() || "Matur Nuwun";
 
-            // Translate option values to friendly text
-            let optionText = '🍜 Makan di Sini (Dine-In)';
+            // Map keys to readable text
+            let optionText = 'Dine-In (Makan kene)';
             let detailLabelText = 'Nomor Meja';
             if (option === 'takeaway') {
-                optionText = '🛍️ Bungkus (Take Away)';
-                detailLabelText = 'Jam Pengambilan';
+                optionText = 'Bungkus (Gowo Bali)';
+                detailLabelText = 'Jam Ambil';
             } else if (option === 'delivery') {
-                optionText = '🚚 Kirim ke Rumah (Delivery)';
-                detailLabelText = 'Alamat Pengantaran';
+                optionText = 'Delivery (Kirim nggon)';
+                detailLabelText = 'Alamat Kirim';
             }
 
-            // Build Message Structure
+            // Map Payment Method text Javanese style
+            let payText = '💵 Bayar Tunai / Cash (Neng nggon)';
+            if (activePaymentMethod === 'qris') {
+                payText = '📱 QRIS (Scan Barcode - Bukti transfer dilampirke)';
+            } else if (activePaymentMethod === 'gopay') {
+                payText = '🟢 GoPay (Ke No: 081952545612)';
+            } else if (activePaymentMethod === 'dana') {
+                payText = '🔵 DANA (Ke No: 081952545612)';
+            }
+
             let msg = `*PESANAN BARU - ANGKRINGAN G-COFFE 24/7*\n`;
             msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
             msg += `👤 *DATA PEMESAN:*\n`;
             msg += `• Nama: *${name}*\n`;
             msg += `• Metode: *${optionText}*\n`;
             msg += `• ${detailLabelText}: *${detail}*\n`;
-            if (notes !== "Tidak ada") {
-                msg += `• Catatan: _"${notes}"_\n`;
+            msg += `• Pembayaran: *${payText}*\n`;
+            if (globalNotes !== "Matur Nuwun" && globalNotes !== "") {
+                msg += `• Catatan Global: _"${globalNotes}"_\n`;
             }
             msg += `\n━━━━━━━━━━━━━━━━━━━━━━\n\n`;
             msg += `🛒 *DAFTAR PESANAN:*\n`;
 
             let total = 0;
+            let segoList = [];
+            let sateList = [];
             let makananList = [];
             let minumanList = [];
 
@@ -974,30 +1142,47 @@
                 const subTotal = qty * item.price;
                 total += subTotal;
                 
-                const line = `  - ${qty}x ${item.name} (${formatRupiah(subTotal)})`;
-                if (item.category === 'makanan') {
+                // Fetch specific item remarks input inside cart
+                const noteInput = document.getElementById(`note-${id}`);
+                const remarkText = noteInput ? noteInput.value.trim() : "";
+                const remarkString = remarkText ? ` (Catetan: _${remarkText}_)` : "";
+
+                const line = `  - ${qty}x ${item.name}${remarkString} [${formatRupiah(subTotal)}]`;
+
+                if (item.category === 'sego') {
+                    segoList.push(line);
+                } else if (item.category === 'sate') {
+                    sateList.push(line);
+                } else if (item.category === 'makanan') {
                     makananList.push(line);
                 } else {
                     minumanList.push(line);
                 }
             });
 
+            // Structuring by category
+            if (segoList.length > 0) {
+                msg += `\n*🍛 Menu Sego:*\n` + segoList.join('\n') + `\n`;
+            }
+            if (sateList.length > 0) {
+                msg += `\n*🍢 Menu Sate:*\n` + sateList.join('\n') + `\n`;
+            }
             if (makananList.length > 0) {
-                msg += `\n*🍜 Makanan:*\n` + makananList.join('\n') + `\n`;
+                msg += `\n*🍜 Mie & Gorengan:*\n` + makananList.join('\n') + `\n`;
             }
             if (minumanList.length > 0) {
-                msg += `\n*🥤 Minuman:*\n` + minumanList.join('\n') + `\n`;
+                msg += `\n*🥤 Wedangan:*\n` + minumanList.join('\n') + `\n`;
             }
 
-            msg += `\n━━━━━━━━━━━━━━━━━━━━━━\n`;
+            msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
             msg += `💵 *TOTAL PEMBAYARAN: ${formatRupiah(total)}*\n`;
             msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-            msg += `_Matur nuwun sanget atas pesanannya. Mohon segera diproses ya mas!_ 🙏`;
+            msg += `_Matur nuwun sanget atas pesanannya. Monggo segera diproses ya mas!_ 🙏`;
 
             return msg;
         }
 
-        // Update WhatsApp live preview text inside the cart
+        // Update live preview in real time
         function updateLiveWAPreview() {
             const previewContainer = document.getElementById('whatsapp-live-preview');
             const entries = Object.entries(cart);
@@ -1010,84 +1195,174 @@
             previewContainer.innerText = buildWhatsAppMessage();
         }
 
-        // Toggle visibility of Shopping Cart Panel
+        // Gamified pre-made packages lists for Decide-O-Matic wheel helper
+        const prepackagedDeals = [
+            { name: "Paket Wareg Gayeng", items: ["sego-teri", "sate-usus", "mendoan", "teh-anget"], price: 10500 },
+            { name: "Paket Melek Songo", items: ["sego-mercon", "sate-puyuh", "kopi-joss"], price: 12000 },
+            { name: "Paket Sederhana Nikmat", items: ["sego-tempe", "tahu-isi", "es-teh"], price: 8500 },
+            { name: "Paket Sultan Angkringan", items: ["sego-teri", "sego-mercon", "sate-usus", "sate-puyuh", "mendoan", "es-jossu"], price: 21000 },
+            { name: "Paket Jahe Hangat", items: ["sego-tempe", "mendoan", "wedang-jahe"], price: 9500 }
+        ];
+        let spunPackageIndex = null;
+
+        function spinForMenu() {
+            synthPop(800, 'sine', 0.1);
+            setTimeout(() => synthPop(600, 'sine', 0.1), 100);
+            setTimeout(() => synthPop(900, 'sine', 0.1), 200);
+
+            const display = document.getElementById('pkg-display');
+            display.classList.add('hidden');
+
+            // Select random package index
+            spunPackageIndex = Math.floor(Math.random() * prepackagedDeals.length);
+            const deal = prepackagedDeals[spunPackageIndex];
+
+            // Render details
+            document.getElementById('pkg-name').innerText = deal.name;
+            
+            // Map keys back to readable string list
+            const itemNamesString = deal.items.map(k => menuDB[k] ? menuDB[k].name : k).join(' + ');
+            document.getElementById('pkg-items').innerText = itemNamesString;
+            document.getElementById('pkg-price').innerText = formatRupiah(deal.price);
+
+            setTimeout(() => {
+                display.classList.remove('hidden');
+                display.classList.add('scale-100');
+                synthChime();
+                showToast(`Ketemu! ${deal.name} cocok buat kowe!`, "fa-gift");
+            }, 300);
+        }
+
+        // Add whole pre-packaged item keys directly to shopping cart
+        function addPackageToCart() {
+            if (spunPackageIndex === null) return;
+            const deal = prepackagedDeals[spunPackageIndex];
+            
+            deal.items.forEach(itemId => {
+                cart[itemId] = (cart[itemId] || 0) + 1;
+            });
+
+            synthChime();
+            updateCartSummary();
+            buildMenuCards();
+            showToast(`${deal.name} wis mlebu keranjang!`, "fa-cart-arrow-down");
+        }
+
+        // Persistent localStorage Guestbook review wall
+        const localReviewsKey = 'angkringan_reviews_v1';
+        let defaultReviews = [
+            { name: "Bayu Sleman", rating: 5, text: "Kopi joss neng kene juwarak! Areng mbeluk, panas legit mantap, mendoane anget terus.", date: "14 Jul 2026" },
+            { name: "Mbak Ririn", rating: 4, text: "Sego kucing sambel terine pedese nagih tenan, pas banget dienggo kumpul konco kos.", date: "12 Jul 2026" },
+            { name: "Tasmen", rating: 5, text: "Website sing nggawe keren banget interaktif tenan! Muga-muga warunge tambah rame lancar!", date: "10 Jul 2026" }
+        ];
+
+        function loadReviews() {
+            let stored = localStorage.getItem(localReviewsKey);
+            let reviews = stored ? JSON.parse(stored) : defaultReviews;
+            
+            const board = document.getElementById('reviews-board');
+            board.innerHTML = '';
+
+            reviews.forEach(rev => {
+                const ratingStars = '⭐'.repeat(rev.rating);
+                const block = document.createElement('div');
+                block.className = "bg-stone-900 border border-stone-800 p-4 rounded-2xl space-y-1 transform hover:scale-[1.01] transition-transform duration-200";
+                block.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-extrabold text-white text-xs">${rev.name}</span>
+                        <span class="text-[9px] text-stone-500">${rev.date}</span>
+                    </div>
+                    <div class="text-[10px] text-yellow-500">${ratingStars}</div>
+                    <p class="text-xs text-stone-300 italic mt-1 leading-snug">"${rev.text}"</p>
+                `;
+                board.appendChild(block);
+            });
+        }
+
+        function submitReview() {
+            const nameInput = document.getElementById('review-name');
+            const ratingInput = document.getElementById('review-rating');
+            const textInput = document.getElementById('review-text');
+
+            const name = nameInput.value.trim() || "Sedulur Mager";
+            const rating = parseInt(ratingInput.value);
+            const text = textInput.value.trim();
+
+            if (!text) {
+                synthPop(200, 'sawtooth', 0.2);
+                showToast("Monggo diisi sambatan/review rumiyin!", "fa-circle-exclamation");
+                textInput.focus();
+                return;
+            }
+
+            let stored = localStorage.getItem(localReviewsKey);
+            let reviews = stored ? JSON.parse(stored) : defaultReviews;
+
+            // Generate short formatted date string
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
+
+            // Insert new review at head
+            reviews.unshift({ name, rating, text, date: dateStr });
+            localStorage.setItem(localReviewsKey, JSON.stringify(reviews));
+
+            // Clear input fields
+            nameInput.value = '';
+            textInput.value = '';
+
+            synthChime();
+            loadReviews();
+            showToast("Review sambatanmu wis nempel neng tembok!", "fa-check-double");
+        }
+
+        // UI navigation utility triggers
         function toggleCartModal() {
+            synthPop(440, 'sine', 0.12);
             const modal = document.getElementById('cart-modal');
             modal.classList.toggle('hidden');
         }
 
-        // Open Cart Modal and automatically scroll down to Name & checkout fields
         function openCartAndFocusCheckout() {
+            synthPop(440, 'sine', 0.12);
             const modal = document.getElementById('cart-modal');
             modal.classList.remove('hidden');
             setTimeout(() => {
-                document.getElementById('order-name').focus();
+                const nameInp = document.getElementById('order-name');
+                if (nameInp) nameInp.focus();
             }, 300);
         }
 
-        // Smooth Scroll utility
-        function scrollToSection(id) {
-            const section = document.getElementById(id);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-            }
+        function formatRupiah(amount) {
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                maximumFractionDigits: 0
+            }).format(amount);
         }
 
-        // Custom Toast Notification System
-        function showToast(message, iconClass = 'fa-circle-info') {
-            const toast = document.getElementById('toast-box');
-            const toastMsg = document.getElementById('toast-message');
-            const toastIcon = document.getElementById('toast-icon');
-
-            toastMsg.innerText = message;
-            toastIcon.innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
-
-            // Animate In
-            toast.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
-            
-            // Auto Hide after 2.5 seconds
-            setTimeout(() => {
-                toast.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
-            }, 2500);
-        }
-
-        // Safe Redirect helper to bypass iOS/Android popup blockers
-        function triggerWhatsAppAPI(messageText) {
-            const phoneNumber = "6289519097381"; // Target WA phone number
-            const encodedMessage = encodeURIComponent(messageText);
-            const waURL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
-
-            // Create temporary anchor tag to bypass popup blockers reliably across devices
-            const linkElement = document.createElement('a');
-            linkElement.href = waURL;
-            linkElement.target = '_blank';
-            document.body.appendChild(linkElement);
-            linkElement.click();
-            document.body.removeChild(linkElement);
-        }
-
-        // Instant Quick Order for Single Item directly to WhatsApp (No Cart Required)
+        // Direct item direct routing bypassing general cart procedures
         function orderSingleItemDirectly(itemId) {
             const item = menuDB[itemId];
-            
-            // Crafting direct quick order message
+            if (!item) return;
+
+            synthChime();
             let msg = `*PESANAN LANGSUNG - ANGKRINGAN G-COFFE 24/7*\n`;
             msg += `━━━━━━━━━━━━━━━━━━━━━━\n\n`;
-            msg += `Halo mas, saya mau order menu ini langsung:\n`;
-            msg += `• *1x ${item.name}* (${formatRupiah(item.price)})\n\n`;
+            msg += `Halo mas, saya mau order menu ini langsung (mager pol):\n`;
+            msg += `• *1x ${item.emoji} ${item.name}* [${formatRupiah(item.price)}]\n\n`;
             msg += `━━━━━━━━━━━━━━━━━━━━━━\n`;
             msg += `💵 *TOTAL: ${formatRupiah(item.price)}*\n\n`;
             msg += `_Mohon segera diproses ya mas. Maturnuwun!_ 🙏`;
 
-            // Trigger safe redirection
             triggerWhatsAppAPI(msg);
         }
 
-        // Construct & Send Cart WhatsApp order message
+        // Run overall validation checking & route directly to WhatsApp API
         function sendOrderWhatsApp() {
             const entries = Object.entries(cart);
             if (entries.length === 0) {
-                showToast("Keranjang Anda masih kosong. Silakan pilih menu dulu!", "fa-circle-exclamation");
+                synthPop(200, 'sawtooth', 0.25);
+                showToast("Keranjang isih kosong melompong mas!", "fa-circle-exclamation");
                 return;
             }
 
@@ -1096,29 +1371,67 @@
             const detail = document.getElementById('order-detail').value.trim();
 
             if (!name) {
-                showToast("Silakan masukkan Nama Pemesan!", "fa-user-clock");
+                synthPop(200, 'sawtooth', 0.2);
+                showToast("Monggo dileboki jenengmu dhisik!", "fa-user-clock");
                 document.getElementById('order-name').focus();
                 return;
             }
 
             let detailLabelText = 'Nomor Meja';
             if (option === 'takeaway') {
-                detailLabelText = 'Jam Pengambilan';
+                detailLabelText = 'Estimasi Jam Ambil';
             } else if (option === 'delivery') {
-                detailLabelText = 'Alamat Pengantaran';
+                detailLabelText = 'Alamat Kirim';
             }
 
             if ((option === 'dine-in' || option === 'delivery') && !detail) {
-                showToast(`Mohon isi ${detailLabelText}!`, "fa-pen-to-square");
+                synthPop(200, 'sawtooth', 0.2);
+                showToast(`Mohon isi data ${detailLabelText}!`, "fa-pen-to-square");
                 document.getElementById('order-detail').focus();
                 return;
             }
 
-            // Build dynamic text format
+            synthChime();
             const finalMessage = buildWhatsAppMessage();
-
-            // Run automatic redirection directly to WhatsApp!
             triggerWhatsAppAPI(finalMessage);
+        }
+
+        function triggerWhatsAppAPI(messageText) {
+            const phoneNumber = "6289519097381"; // Target WA number
+            const encodedMessage = encodeURIComponent(messageText);
+            const waURL = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
+
+            // Create temporary anchor tag to reliably bypass popup blockers on mobile devices
+            const linkElement = document.createElement('a');
+            linkElement.href = waURL;
+            linkElement.target = '_blank';
+            document.body.appendChild(linkElement);
+            linkElement.click();
+            document.body.removeChild(linkElement);
+        }
+
+        function showToast(message, iconClass = 'fa-circle-info') {
+            const toast = document.getElementById('toast-box');
+            const toastMsg = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastMsg.innerText = message;
+            toastIcon.innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
+
+            // Animate transition in
+            toast.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+            
+            // Auto hide
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+            }, 3000);
+        }
+
+        // Initialize App on Window load
+        window.onload = function() {
+            buildMenuCards();
+            loadReviews();
+            updateCartSummary();
         }
     </script>
 </body>
